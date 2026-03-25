@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer - Student Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .timer-card {
+            background: var(--card-current);
+            padding: 3rem;
+            border-radius: 50%;
+            width: 380px;
+            height: 380px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 40px 80px -20px rgba(99, 102, 241, 0.2);
+            border: 12px solid rgba(99, 102, 241, 0.05);
+            position: relative;
+            transition: var(--transition);
+            backdrop-filter: blur(20px);
+        }
+        .timer-display {
+            font-size: 5.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            letter-spacing: -2px;
+        }
+        .timer-status {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .timer-controls {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .timer-settings {
+            max-width: 500px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .timer-progress {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 50%;
+            border: 8px solid var(--primary);
+            border-top-color: transparent;
+            border-left-color: transparent;
+            transform: rotate(-45deg);
+            transition: 0.1s linear;
+            pointer-events: none;
+        }
+        .btn-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-header">
+            <h1>Pomodoro Timer</h1>
+            <p>Boost your productivity using the Pomodoro technique. Focus for 25 mins, then take a short break.</p>
+        </div>
+
+        <div class="timer-card" id="timer-box">
+            <div class="timer-progress" id="progress-circle"></div>
+            <div class="timer-status" id="status">Focus Time</div>
+            <div class="timer-display" id="time-left">25:00</div>
+        </div>
+
+        <div class="timer-controls">
+            <button class="btn btn-primary btn-circle" id="start-btn" onclick="toggleTimer()">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="btn btn-primary btn-circle" style="background: #64748b;" onclick="resetTimer()">
+                <i class="fas fa-undo"></i>
+            </button>
+        </div>
+
+        <div class="timer-settings">
+            <div class="form-group">
+                <label>Focus (mins)</label>
+                <input type="number" id="focus-time" value="25" min="1" max="60">
+            </div>
+            <div class="form-group">
+                <label>Break (mins)</label>
+                <input type="number" id="break-time" value="5" min="1" max="30">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Connect with <b>webwithaditya</b> for more amazing tools!</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #64748b;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let timeLeft;
+        let timerId = null;
+        let isWorkSession = true;
+        let totalSeconds;
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('time-left').innerText = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update progress circle (simple CSS border-image or rotation could be complex, 
+            // limiting to simple display for now)
+            const progress = ((totalSeconds - timeLeft) / totalSeconds) * 360;
+            // document.getElementById('progress-circle').style.transform = `rotate(${progress - 45}deg)`;
+        }
+
+        function initTimer() {
+            const focusMinutes = parseInt(document.getElementById('focus-time').value) || 25;
+            timeLeft = focusMinutes * 60;
+            totalSeconds = timeLeft;
+            updateDisplay();
+        }
+
+        function toggleTimer() {
+            const startBtn = document.getElementById('start-btn');
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+                startBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                if (!timeLeft) initTimer();
+                startBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                timerId = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        notify();
+                        switchSession();
+                    }
+                }, 1000);
+            }
+        }
+
+        function switchSession() {
+            isWorkSession = !isWorkSession;
+            const focusMinutes = parseInt(document.getElementById('focus-time').value) || 25;
+            const breakMinutes = parseInt(document.getElementById('break-time').value) || 5;
+            
+            timeLeft = (isWorkSession ? focusMinutes : breakMinutes) * 60;
+            totalSeconds = timeLeft;
+            document.getElementById('status').innerText = isWorkSession ? 'Focus Time' : 'Break Time';
+            document.getElementById('status').style.color = isWorkSession ? 'var(--primary)' : '#10b981';
+            updateDisplay();
+            toggleTimer();
+        }
+
+        function resetTimer() {
+            clearInterval(timerId);
+            timerId = null;
+            isWorkSession = true;
+            document.getElementById('status').innerText = 'Focus Time';
+            document.getElementById('status').style.color = '#64748b';
+            document.getElementById('start-btn').innerHTML = '<i class="fas fa-play"></i>';
+            initTimer();
+        }
+
+        function notify() {
+            // Play a subtle beep
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.5);
+            
+            if (Notification.permission === "granted") {
+                new Notification(isWorkSession ? "Time for a break!" : "Back to work!");
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission();
+            }
+        }
+
+        initTimer();
+    </script>
+</body>
+</html>

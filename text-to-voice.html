@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Voice - Student Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🎧 AI Voice Generator</div>
+                <h1 style="font-size: 3rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Text to <span style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Voice</span></h1>
+                <p style="color: #64748b; font-size: 1.1rem;">High-fidelity conversion for your study notes.</p>
+            </div>
+
+            <textarea id="text-input" placeholder="Enter your text here..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 20px; font-size: 1.1rem; line-height: 1.6;"></textarea>
+
+            <div class="controls" style="background: rgba(99, 102, 241, 0.03); padding: 25px; border-radius: 1.5rem; border: 1px solid rgba(99, 102, 241, 0.1); display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center;">
+                <select id="voice-select" style="background: var(--bg-current); border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); padding: 12px; flex: 1; min-width: 250px; color: var(--text-current);">
+                    <!-- Voices will be populated by JS -->
+                </select>
+                
+                <div style="display: flex; align-items: center; gap: 15px; background: var(--card-current); padding: 10px 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                    <label style="font-weight: 600; color: #64748b;">Speed</label>
+                    <input type="range" id="rate-slider" min="0.5" max="2" value="1" step="0.1" style="accent-color: var(--primary);">
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button id="play-btn" class="btn btn-primary" style="border-radius: 100px; padding: 12px 30px; background: var(--primary-gradient); border: none; font-weight: 700; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);"><i class="fas fa-play"></i> Play</button>
+                    <button id="pause-btn" class="btn btn-primary" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; background: #fbbf24; border: none; display: flex; align-items: center; justify-content: center;"><i class="fas fa-pause"></i></button>
+                    <button id="stop-btn" class="btn btn-primary" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; background: #ef4444; border: none; display: flex; align-items: center; justify-content: center;"><i class="fas fa-stop"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Connect with <b>webwithaditya</b> for more amazing tools!</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #64748b;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const synth = window.speechSynthesis;
+        const textInput = document.getElementById('text-input');
+        const voiceSelect = document.getElementById('voice-select');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const rateSlider = document.getElementById('rate-slider');
+
+        let voices = [];
+
+        function populateVoices() {
+            voices = synth.getVoices();
+            voiceSelect.innerHTML = '';
+            
+            // Filter prioritized voices (English and Hindi)
+            voices.forEach((voice, i) => {
+                if (voice.lang.includes('en') || voice.lang.includes('hi')) {
+                    const option = document.createElement('option');
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    option.setAttribute('data-lang', voice.lang);
+                    option.setAttribute('data-name', voice.name);
+                    voiceSelect.appendChild(option);
+                }
+            });
+        }
+
+        populateVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoices;
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (synth.speaking) {
+                synth.resume();
+                return;
+            }
+
+            if (textInput.value !== '') {
+                const utterThis = new SpeechSynthesisUtterance(textInput.value);
+                const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+                
+                voices.forEach((voice) => {
+                    if (voice.name === selectedOption) {
+                        utterThis.voice = voice;
+                    }
+                });
+
+                utterThis.rate = rateSlider.value;
+                synth.speak(utterThis);
+            }
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            if (synth.speaking && !synth.paused) {
+                synth.pause();
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            synth.cancel();
+        });
+    </script>
+</body>
+</html>

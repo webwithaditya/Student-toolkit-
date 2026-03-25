@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Word - Student Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">📄 Document Converter</div>
+                <h1 style="font-size: 3rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">PDF to <span style="color: #3b82f6;">Word</span></h1>
+                <p style="color: #64748b; font-size: 1.1rem;">Instant, accurate conversion to editable DOCX.</p>
+            </div>
+
+            <div class="upload-area" onclick="document.getElementById('file-input').click()" style="border: 2px dashed rgba(59, 130, 246, 0.3); background: rgba(59, 130, 246, 0.02); border-radius: 2rem; padding: 4rem 2rem; transition: var(--transition);">
+                <i class="fas fa-file-export" style="font-size: 3.5rem; color: #3b82f6; margin-bottom: 20px;"></i>
+                <p style="font-size: 1.2rem; font-weight: 600; color: #374151;">Upload PDF file to <span style="color: #3b82f6;">Convert</span></p>
+                <p style="color: #64748b; font-size: 0.9rem; margin-top: 5px;">Max file size: 50MB</p>
+                <input type="file" id="file-input" accept=".pdf" style="display: none;">
+            </div>
+
+            <div id="file-list"></div>
+
+            <button id="convert-btn" class="btn btn-primary" style="width: 100%; display: none;">Convert to Word</button>
+
+            <div class="progress-container">
+                <p style="margin-bottom: 10px;">Converting... <span id="percent">0%</span></p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <a id="download-btn" href="#" class="btn btn-primary" style="text-align: center; background: #10b981;">
+                <i class="fas fa-download"></i> Download Word File
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Connect with <b>webwithaditya</b> for more amazing tools!</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #64748b;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+        const convertBtn = document.getElementById('convert-btn');
+        const progressContainer = document.querySelector('.progress-container');
+        const progressFill = document.getElementById('progress-fill');
+        const percentText = document.getElementById('percent');
+        const downloadBtn = document.getElementById('download-btn');
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                fileList.innerHTML = `
+                    <div class="file-item">
+                        <span><i class="fas fa-file-pdf"></i> ${file.name}</span>
+                        <span>${(file.size / 1024).toFixed(2)} KB</span>
+                    </div>
+                `;
+                convertBtn.style.display = 'block';
+            }
+        });
+
+        convertBtn.addEventListener('click', () => {
+            convertBtn.style.display = 'none';
+            progressContainer.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                        downloadBtn.style.display = 'block';
+                        downloadBtn.setAttribute('download', fileInput.files[0].name.replace('.pdf', '') + '.docx');
+                    }, 500);
+                }
+                progressFill.style.width = progress + '%';
+                percentText.textContent = Math.round(progress) + '%';
+            }, 300);
+        });
+    </script>
+</body>
+</html>

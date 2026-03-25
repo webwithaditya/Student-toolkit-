@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator - Student Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gpa-card {
+            background: var(--card-current);
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            border: var(--glass-border);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .subject-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .subject-row input, .subject-row select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            color: inherit;
+            transition: var(--transition);
+        }
+        .subject-row input:focus, .subject-row select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+        .subject-row select option {
+            background: var(--bg-current);
+            color: var(--text-current);
+        }
+        .remove-btn {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .remove-btn:hover {
+            background: #ef4444;
+            color: white;
+            transform: scale(1.1);
+        }
+        .result-container {
+            text-align: center;
+            padding: 2.5rem;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: var(--radius);
+            margin-top: 2rem;
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.4);
+        }
+        .gpa-score {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+        }
+        .gpa-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-header">
+            <h1>GPA Calculator</h1>
+            <p>Calculate your GPA/CGPA effortlessly. Add your subjects, grades, and credits below.</p>
+        </div>
+
+        <div class="gpa-card">
+            <div id="subjects-container">
+                <div class="subject-row">
+                    <input type="text" placeholder="Subject Name" class="subject-name">
+                    <select class="subject-grade">
+                        <option value="10">O (10)</option>
+                        <option value="9">A+ (9)</option>
+                        <option value="8">A (8)</option>
+                        <option value="7">B+ (7)</option>
+                        <option value="6">B (6)</option>
+                        <option value="5">C (5)</option>
+                        <option value="0">F (0)</option>
+                    </select>
+                    <input type="number" placeholder="Credits" class="subject-credits" value="3">
+                    <button class="remove-btn" onclick="removeRow(this)"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-primary" onclick="addRow()"><i class="fas fa-plus"></i> Add Subject</button>
+                <button class="btn btn-primary" onclick="calculateGPA()" style="background: var(--accent);">Calculate GPA</button>
+            </div>
+
+            <div id="result-box" class="result-container" style="display: none;">
+                <div class="gpa-label">Your Calculated GPA</div>
+                <div class="gpa-score" id="gpa-display">0.00</div>
+                <p id="gpa-message" style="margin-top: 10px;"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Connect with <b>webwithaditya</b> for more amazing tools!</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #64748b;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function addRow() {
+            const container = document.getElementById('subjects-container');
+            const newRow = document.createElement('div');
+            newRow.className = 'subject-row';
+            newRow.innerHTML = `
+                <input type="text" placeholder="Subject Name" class="subject-name">
+                <select class="subject-grade">
+                    <option value="10">O (10)</option>
+                    <option value="9">A+ (9)</option>
+                    <option value="8">A (8)</option>
+                    <option value="7">B+ (7)</option>
+                    <option value="6">B (6)</option>
+                    <option value="5">C (5)</option>
+                    <option value="0">F (0)</option>
+                </select>
+                <input type="number" placeholder="Credits" class="subject-credits" value="3">
+                <button class="remove-btn" onclick="removeRow(this)"><i class="fas fa-trash"></i></button>
+            `;
+            container.appendChild(newRow);
+        }
+
+        function removeRow(btn) {
+            const rows = document.querySelectorAll('.subject-row');
+            if (rows.length > 1) {
+                btn.parentElement.remove();
+            } else {
+                alert("At least one subject is required!");
+            }
+        }
+
+        function calculateGPA() {
+            const grades = document.querySelectorAll('.subject-grade');
+            const credits = document.querySelectorAll('.subject-credits');
+            
+            let totalGradePoints = 0;
+            let totalCredits = 0;
+
+            for (let i = 0; i < grades.length; i++) {
+                const grade = parseFloat(grades[i].value);
+                const credit = parseFloat(credits[i].value);
+
+                if (!isNaN(grade) && !isNaN(credit)) {
+                    totalGradePoints += grade * credit;
+                    totalCredits += credit;
+                }
+            }
+
+            const gpa = totalCredits > 0 ? (totalGradePoints / totalCredits).toFixed(2) : 0;
+            
+            const resultBox = document.getElementById('result-box');
+            const gpaDisplay = document.getElementById('gpa-display');
+            const gpaMessage = document.getElementById('gpa-message');
+
+            gpaDisplay.innerText = gpa;
+            resultBox.style.display = 'block';
+
+            if (gpa >= 9) {
+                gpaMessage.innerText = "Outstanding! Keep it up! 🚀";
+            } else if (gpa >= 8) {
+                gpaMessage.innerText = "Excellent work! 🌟";
+            } else if (gpa >= 7) {
+                gpaMessage.innerText = "Good job! Keep improving. 👍";
+            } else {
+                gpaMessage.innerText = "Keep working hard! You can do it. 💪";
+            }
+
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

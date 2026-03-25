@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarise Notes - Student Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(217, 70, 239, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🧠 Smart Summarizer</div>
+                <h1 style="font-size: 3rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Summarise <span style="background: linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Notes</span></h1>
+                <p style="color: #64748b; font-size: 1.1rem;">Advanced logic to extract core concepts instantly.</p>
+            </div>
+
+            <textarea id="notes-input" placeholder="Paste your notes here..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 20px; font-size: 1.1rem; line-height: 1.6; min-height: 250px;"></textarea>
+
+            <div class="controls" style="margin-bottom: 30px; display: flex; gap: 15px; justify-content: center;">
+                <button id="summarise-btn" class="btn btn-primary" style="background: var(--primary-gradient); padding: 1rem 2.5rem; border-radius: 100px; border: none; font-weight: 700; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);"><i class="fas fa-magic"></i> Summarise Now</button>
+                <button id="clear-btn" class="btn" style="background: rgba(0,0,0,0.05); padding: 1rem 2rem; border-radius: 100px; border: 1px solid rgba(0,0,0,0.1);"><i class="fas fa-trash"></i> Clear</button>
+            </div>
+
+            <div class="progress-container" id="summarise-loader" style="display: none; background: rgba(0,0,0,0.03); padding: 20px; border-radius: 1.2rem; border: 1px solid rgba(0,0,0,0.05);">
+                <p style="margin-bottom: 15px; text-align: center; color: var(--primary); font-weight: 600;">Analyzing your text with Smart Logic...</p>
+                <div class="progress-bar" style="height: 10px; background: rgba(0,0,0,0.1); border-radius: 100px; overflow: hidden;">
+                    <div class="progress-fill" id="summarise-progress" style="width: 0%; height: 100%; background: var(--primary-gradient); transition: width 0.3s cubic-bezier(0.1, 0.7, 1.0, 0.1);"></div>
+                </div>
+            </div>
+
+            <div id="summary-output" style="display: none; margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; animation: slideUp 0.6s ease-out;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h2 style="font-weight: 800; letter-spacing: -0.01em;">Analysis <span style="color: var(--primary);">Results</span></h2>
+                    <button id="copy-btn" class="btn" style="background: var(--accent); color: white; padding: 10px 20px; font-size: 0.9rem; border-radius: 12px; border: none; font-weight: 600; box-shadow: 0 5px 15px -3px rgba(217, 70, 239, 0.3);">
+                        <i class="fas fa-copy"></i> Copy Summary
+                    </button>
+                </div>
+
+                <div id="para-summary" style="margin-bottom: 30px; font-weight: 500; line-height: 1.8; color: #4b5563; font-size: 1.05rem; padding: 25px; background: rgba(99, 102, 241, 0.05); border-radius: 1.2rem; border-left: 5px solid var(--primary);"></div>
+                <ul id="bullet-summary" style="list-style: none; display: flex; flex-direction: column; gap: 15px;"></ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Connect with <b>webwithaditya</b> for more amazing tools!</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #64748b;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const summariseBtn = document.getElementById('summarise-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const notesInput = document.getElementById('notes-input');
+        const outputBox = document.getElementById('summary-output');
+        const loader = document.getElementById('summarise-loader');
+        const progressFill = document.getElementById('summarise-progress');
+        const paraSummary = document.getElementById('para-summary');
+        const bulletSummary = document.getElementById('bullet-summary');
+        const copyBtn = document.getElementById('copy-btn');
+
+        summariseBtn.addEventListener('click', () => {
+            const text = notesInput.value.trim();
+            if (!text) {
+                alert('Please paste some notes first!');
+                return;
+            }
+
+            // Reset UI
+            outputBox.style.display = 'none';
+            loader.style.display = 'block';
+            progressFill.style.width = '0%';
+
+            // Simple loading animation
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 30;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        processSummary(text);
+                    }, 500);
+                }
+                progressFill.style.width = progress + '%';
+            }, 200);
+        });
+
+        function processSummary(text) {
+            // Split into sentences
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            const cleanSentences = sentences.map(s => s.trim()).filter(s => s.length > 10);
+
+            if (cleanSentences.length === 0) {
+                paraSummary.textContent = text;
+                bulletSummary.innerHTML = `<li>${text}</li>`;
+            } else {
+                // Algorithm: Pick top 3 longest sentences (indicative of importance)
+                const sorted = [...cleanSentences].sort((a, b) => b.length - a.length);
+                const importantSentences = sorted.slice(0, 3);
+
+                // For the paragraph, use original order if they are among important ones
+                const finalPara = cleanSentences.filter(s => importantSentences.includes(s)).join(' ');
+                paraSummary.textContent = finalPara;
+
+                // Bullet points
+                bulletSummary.innerHTML = importantSentences.map(s => `<li>${s}</li>`).join('');
+            }
+
+            loader.style.display = 'none';
+            outputBox.style.display = 'block';
+            outputBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        clearBtn.addEventListener('click', () => {
+            notesInput.value = '';
+            outputBox.style.display = 'none';
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const summaryText = paraSummary.textContent + '\n\n' + 
+                              Array.from(bulletSummary.querySelectorAll('li'))
+                                   .map(li => '• ' + li.textContent).join('\n');
+            
+            navigator.clipboard.writeText(summaryText).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

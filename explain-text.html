@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explain Difficult Text Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Break down complex text into easy bullet points for free. Perfect for students studying difficult academic papers or textbooks. Fast, secure and easy to use.">
+    <meta name="keywords" content="explain difficult text online free, simplify text, text summarizer, student toolkit, free text simplifier for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(217, 70, 239, 0.1); color: #d946ef; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🧠 Smart Text Simplifier</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Explain Difficult Text Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Paste complex paragraphs and get easy-to-understand bullet points by simplifying language.</p>
+            </div>
+
+            <textarea id="text-input" placeholder="Paste your difficult text here..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 20px; font-size: 1.1rem; line-height: 1.6; min-height: 200px; width: 100%; resize: vertical; margin-bottom: 25px;"></textarea>
+
+            <div class="controls" style="margin-bottom: 40px; display: flex; gap: 15px; justify-content: center;">
+                <button id="explain-btn" class="btn btn-primary" style="background: #d946ef; border: none; padding: 1rem 2.5rem; border-radius: 100px; font-weight: 700; box-shadow: 0 10px 20px -5px rgba(217, 70, 239, 0.4);"><i class="fas fa-brain"></i> Explain Now</button>
+                <button id="clear-btn" class="btn" style="background: rgba(0,0,0,0.05); padding: 1rem 2rem; border-radius: 100px; border: 1px solid rgba(0,0,0,0.1);"><i class="fas fa-trash"></i> Clear</button>
+            </div>
+
+            <div id="loader" style="display: none; text-align: center; margin-bottom: 40px;">
+                <div class="spinner"></div>
+                <p style="color: var(--text-current); opacity: 0.7; font-weight: 600; margin-top: 15px;">Simplifying text structure...</p>
+            </div>
+
+            <div id="result-container" style="display: none; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h2 style="font-weight: 800; letter-spacing: -0.01em;">Simplified <span style="color: #d946ef;">Points</span></h2>
+                    <button id="copy-btn" class="btn" style="background: #d946ef; color: white; padding: 10px 20px; font-size: 0.9rem; border-radius: 12px; border: none; font-weight: 600; box-shadow: 0 5px 15px -3px rgba(217, 70, 239, 0.3);">
+                        <i class="fas fa-copy"></i> Copy Points
+                    </button>
+                </div>
+                <ul id="points-list" style="list-style: none; display: flex; flex-direction: column; gap: 15px; background: rgba(217, 70, 239, 0.03); padding: 25px; border-radius: 1.2rem; border-left: 5px solid #d946ef;"></ul>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our Explain Difficult Text tool, simply paste any complex paragraph into the input box above. Once you've added your text, click the "Explain Now" button. Our smart logic will break down the text into its core components and display them as easy-to-read bullet points. You can then copy these points for your study notes. It's a quick way to tackle difficult assignments.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Students often encounter dense academic language in research papers and textbooks. This tool helps by breaking down long, convoluted sentences into understandable snippets. It improves comprehension, saves study time, and helps in summarizing complex information for revision purposes. It's especially useful for grasping difficult definitions and theories in seconds.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free text simplifier helps students understand difficult language quickly and easily. It works without login and supports all academic subjects. Students can analyze complex definitions in seconds using this simple and fast tool. Our tool focuses on clarity and simplicity, making complex learning material more accessible while ensuring your text remains private within your own browser.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(217, 70, 239, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;">Summarise Notes Tool</a>
+                    <a href="image-to-text.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;">Image to Text Tool</a>
+                    <a href="word-counter.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;">Word Counter Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const explainBtn = document.getElementById('explain-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const textInput = document.getElementById('text-input');
+        const loader = document.getElementById('loader');
+        const resultContainer = document.getElementById('result-container');
+        const pointsList = document.getElementById('points-list');
+
+        explainBtn.addEventListener('click', () => {
+            const text = textInput.value.trim();
+            if (!text) {
+                alert('Please paste some text first!');
+                return;
+            }
+
+            loader.style.display = 'block';
+            resultContainer.style.display = 'none';
+
+            setTimeout(() => {
+                const points = processText(text);
+                displayPoints(points);
+                loader.style.display = 'none';
+                resultContainer.style.display = 'block';
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+        });
+
+        function processText(text) {
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            const processedPoints = [];
+            sentences.forEach(s => {
+                const trimmed = s.trim();
+                const words = trimmed.split(/\s+/);
+                if (words.length > 25) {
+                    const parts = trimmed.split(/, |; |: /);
+                    parts.forEach(p => { if (p.trim().length > 10) processedPoints.push(p.trim()); });
+                } else if (trimmed.length > 5) {
+                    processedPoints.push(trimmed);
+                }
+            });
+            return processedPoints.length > 0 ? processedPoints : [text];
+        }
+
+        function displayPoints(points) {
+            pointsList.innerHTML = points.map(p => `<li><i class="fas fa-arrow-right" style="color: #d946ef; margin-right: 15px; font-size: 0.8rem;"></i> ${p}</li>`).join('');
+        }
+
+        clearBtn.addEventListener('click', () => { textInput.value = ''; resultContainer.style.display = 'none'; });
+        copyBtn.addEventListener('click', () => {
+            const pointsText = Array.from(pointsList.querySelectorAll('li')).map(li => '• ' + li.textContent.trim()).join('\n');
+            navigator.clipboard.writeText(pointsText).then(() => {
+                const old = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => copyBtn.innerHTML = old, 1500);
+            });
+        });
+    </script>
+    <style>
+        .spinner { width: 50px; height: 50px; border: 5px solid rgba(217, 70, 239, 0.1); border-top: 5px solid #d946ef; border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #points-list li { display: flex; align-items: flex-start; line-height: 1.6; font-size: 1.1rem; color: var(--text-current); font-weight: 500; }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+        .tag { background: rgba(217, 70, 239, 0.1); color: #d946ef; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #d946ef; color: white; transform: translateY(-2px); }
+    </style>
+</body>
+</html>

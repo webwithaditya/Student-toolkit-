@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech Hindi Free - AI Voice Generator | Student Toolkit</title>
+    <meta name="description" content="Convert any text to high-quality audio with our free AI text to speech tool. Supports Hindi and multiple languages. Perfect for students to listen to notes.">
+    <meta name="keywords" content="text to speech hindi free, text to voice, ai voice generator, online tts, student toolkit, free text to speech for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🎧 AI Voice Generator</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Text to Speech Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">High-fidelity text-to-speech conversion for your study notes and research.</p>
+            </div>
+
+            <textarea id="text-input" placeholder="Enter or paste the text you want to convert to voice..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 20px; font-size: 1.1rem; line-height: 1.6; width: 100%; min-height: 200px; margin-bottom: 25px;"></textarea>
+
+            <div class="controls" style="background: rgba(99, 102, 241, 0.03); padding: 25px; border-radius: 1.5rem; border: 1px solid rgba(99, 102, 241, 0.1); display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center; margin-bottom: 40px;">
+                <select id="voice-select" style="background: var(--bg-current); border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); padding: 12px; flex: 1; min-width: 250px; color: var(--text-current); font-weight: 600;">
+                    <!-- Voices will be populated by JS -->
+                </select>
+                
+                <div style="display: flex; align-items: center; gap: 15px; background: var(--card-current); padding: 10px 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                    <label style="font-weight: 600; color: var(--text-current); opacity: 0.7;">Speed</label>
+                    <input type="range" id="rate-slider" min="0.5" max="2" value="1" step="0.1" style="accent-color: var(--primary); cursor: pointer;">
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button id="play-btn" class="btn btn-primary" style="border-radius: 100px; padding: 12px 30px; background: var(--primary-gradient); border: none; font-weight: 700; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);"><i class="fas fa-play"></i> Play</button>
+                    <button id="pause-btn" class="btn btn-primary" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; background: #fbbf24; border: none; display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-pause"></i></button>
+                    <button id="stop-btn" class="btn btn-primary" style="border-radius: 50%; width: 50px; height: 50px; padding: 0; background: #ef4444; border: none; display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-stop"></i></button>
+                </div>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>Using our Text to Speech tool is easy. Enter your study notes or any text into the input field above. Select your preferred voice from the dropdown menu (available voices vary by your device/browser). Adjust the speaking speed to your liking using the slider and click "Play". You can pause or stop the playback at any time. It's an intuitive way to hear your notes read aloud.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Auditory learning is a powerful way to retain information for students. By converting your notes to voice, you can learn while commuting, exercising, or just resting your eyes. This free online TTS tool helps students multi-task and increases the frequency of academic information exposure, leading to better memory retention and overall study efficiency.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free text to speech tool helps students convert text to voice quickly and easily. It works without login and supports various languages including Hindi narration. Students can listen to their assignments and lecture notes in seconds using this simple and fast tool. Our tool provides a high-quality listening experience entirely within your web browser for maximum privacy.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(99, 102, 241, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Summarise Notes Tool</a>
+                    <a href="voice-to-text.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Voice to Text Tool</a>
+                    <a href="resume-builder.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Resume Builder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const synth = window.speechSynthesis;
+        const textInput = document.getElementById('text-input');
+        const voiceSelect = document.getElementById('voice-select');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const rateSlider = document.getElementById('rate-slider');
+
+        let voices = [];
+
+        function populateVoiceList() {
+            voices = synth.getVoices();
+            const selectedIndex = voiceSelect.selectedIndex < 0 ? 0 : voiceSelect.selectedIndex;
+            voiceSelect.innerHTML = '';
+
+            voices.forEach((voice, i) => {
+                const option = document.createElement('option');
+                option.textContent = `${voice.name} (${voice.lang})`;
+                option.setAttribute('data-lang', voice.lang);
+                option.setAttribute('data-name', voice.name);
+                voiceSelect.appendChild(option);
+            });
+            voiceSelect.selectedIndex = selectedIndex;
+        }
+
+        populateVoiceList();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoiceList;
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (synth.speaking) {
+                if (synth.paused) {
+                    synth.resume();
+                }
+                return;
+            }
+
+            if (textInput.value !== '') {
+                const utterThis = new SpeechSynthesisUtterance(textInput.value);
+                const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+                
+                for (let i = 0; i < voices.length; i++) {
+                    if (voices[i].name === selectedOption) {
+                        utterThis.voice = voices[i];
+                    }
+                }
+                
+                utterThis.rate = rateSlider.value;
+                synth.speak(utterThis);
+            }
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            if (synth.speaking && !synth.paused) {
+                synth.pause();
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            synth.cancel();
+        });
+    </script>
+    <style>
+        .tag { background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

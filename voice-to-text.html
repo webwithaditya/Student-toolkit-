@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice to Text Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Convert speech to text instantly with our free online voice to text tool. perfect for students to transcribe lectures and notes. Fast, secure and easy to use.">
+    <meta name="keywords" content="voice to text online free, speech to text, transcribe lecture, student tools, student toolkit, free dictation tool for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🎤 Smart Transcription</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Voice to Text Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Convert your speech into accurate text in real-time using advanced recognition.</p>
+            </div>
+
+            <div id="output-text" placeholder="Your transcribed text will appear here..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 25px; font-size: 1.1rem; line-height: 1.8; min-height: 250px; width: 100%; margin-bottom: 25px; white-space: pre-wrap; color: var(--text-current); overflow-y: auto;"></div>
+            
+            <div class="controls" style="text-align: center; display: flex; gap: 15px; justify-content: center; margin-bottom: 40px;">
+                <button id="start-btn" class="btn btn-primary" style="background: #10b981; padding: 1.2rem 3rem; border-radius: 100px; font-weight: 800; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);"><i class="fas fa-microphone"></i> Start Recording</button>
+                <button id="stop-btn" class="btn" style="background: #ef4444; color: white; border: none; padding: 1.2rem 2.5rem; border-radius: 100px; font-weight: 700; display: none;"><i class="fas fa-stop"></i> Stop</button>
+                <button id="copy-btn" class="btn" style="background: rgba(0,0,0,0.05); padding: 1.2rem 2rem; border-radius: 100px; border: 1px solid rgba(0,0,0,0.1);"><i class="fas fa-copy"></i> Copy Text</button>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our Voice to Text tool, simply click the "Start Recording" button and allow your browser to access your microphone. Once permission is granted, start speaking clearly. Our system will transcribe your voice into text in real-time. Click "Stop" when you're finished, and then use the "Copy Text" button to save your words for your notes or assignments.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Voice-to-text is an invaluable study aid for students who prefer speaking over typing. It's perfect for quickly drafting essays, transcribing lectures, or recording thought-provoking ideas while on the move. By using dictation, students can significantly increase their writing speed and reduce the physical strain of long typing sessions. It also aids students with learning disabilities like dyslexia by improving accessibility.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free voice to text tool helps students transcribe lectures and notes quickly and easily. It works without login and uses your browser's native speech recognition for speed and security. Students can convert speech to text in seconds using this simple and fast tool. Our tool is optimized for academic dictation, ensuring your ideas are captured accurately so you can focus on learning.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="text-to-voice.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Text to Speech Tool</a>
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Summarise Notes Tool</a>
+                    <a href="todo-list.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">To-Do List Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const outputText = document.getElementById('output-text');
+
+        let recognition;
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            recognition.onresult = (event) => {
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    }
+                }
+                if (finalTranscript) {
+                    outputText.innerText += finalTranscript + ' ';
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                alert('Microphone error: ' + event.error);
+                stopRecording();
+            };
+        } else {
+            alert('Speech recognition is not supported in this browser. Please try Chrome.');
+            startBtn.disabled = true;
+        }
+
+        function startRecording() {
+            recognition.start();
+            startBtn.style.display = 'none';
+            stopBtn.style.display = 'inline-block';
+            outputText.classList.add('recording');
+        }
+
+        function stopRecording() {
+            recognition.stop();
+            startBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'none';
+            outputText.classList.remove('recording');
+        }
+
+        startBtn.addEventListener('click', startRecording);
+        stopBtn.addEventListener('click', stopRecording);
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(outputText.innerText)
+                .then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => copyBtn.innerHTML = originalText, 2000);
+                });
+        });
+    </script>
+    <style>
+        .tag { background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #10b981; color: white; transform: translateY(-2px); }
+        .recording { border-color: #10b981 !important; box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

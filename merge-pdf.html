@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge PDF Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Free online tool to merge PDF files easily without login. Perfect for students. Fast, secure and easy to use. Combine your assignments and notes instantly.">
+    <meta name="keywords" content="merge pdf online free, student toolkit, pdf tools, merge pdf for students, combine pdf free">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">📄 Document Optimization</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Merge PDF Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Combine multiple PDF files into a single document instantly.</p>
+            </div>
+
+            <div class="upload-area" id="drop-zone" onclick="document.getElementById('file-input').click()" style="border: 2px dashed rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.02); border-radius: 2rem; padding: 4rem 2rem; transition: var(--transition); text-align: center; cursor: pointer; margin-bottom: 30px;">
+                <i class="fas fa-file-pdf" style="font-size: 3.5rem; color: #10b981; margin-bottom: 20px;"></i>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-current);">Click to <span style="color: #10b981;">Select PDFs</span> or Drag & Drop</p>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 0.9rem; margin-top: 5px;">Upload multiple files to merge them into one</p>
+                <input type="file" id="file-input" multiple accept=".pdf" style="display: none;">
+            </div>
+
+            <div id="file-list" style="margin-bottom: 30px; display: flex; flex-direction: column; gap: 10px;"></div>
+
+            <div id="action-area" style="display: none; text-align: center;">
+                <button id="merge-btn" class="btn btn-primary" style="background: #10b981; padding: 1.2rem 3rem; border-radius: 100px; font-weight: 800; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4);">
+                    <i class="fas fa-object-group"></i> Merge Files Now
+                </button>
+            </div>
+
+            <div id="loader" style="display: none; text-align: center; margin-bottom: 40px; margin-top: 20px;">
+                <div class="spinner"></div>
+                <p style="color: var(--text-current); opacity: 0.7; font-weight: 600; margin-top: 15px;" id="loader-text">Merging your PDFs...</p>
+                <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; margin-top: 10px; overflow: hidden;">
+                    <div id="progress-fill" style="width: 0%; height: 100%; background: #10b981; transition: width 0.3s;"></div>
+                </div>
+            </div>
+
+            <div id="download-area" style="display: none; text-align: center; margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
+                <h3 style="margin-bottom: 20px; font-weight: 800;">Merge Complete! 🎉</h3>
+                <a id="download-link" class="btn btn-primary" style="background: #10b981; padding: 1.2rem 3rem; border-radius: 100px; font-weight: 800;">
+                    <i class="fas fa-download"></i> Download Merged PDF
+                </a>
+                <p style="margin-top: 15px;"><a href="merge-pdf.html" style="color: var(--text-current); opacity: 0.7; text-decoration: underline;">Merge more files</a></p>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our Merge PDF tool, upload your PDF files by clicking the upload area or dragging them directly into the browser. Once you've selected all the files you want to combine, click "Merge Files Now". Our system will process the documents and provide a download link for the merged file. It's fast, simple, and completely free.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Students often have multiple project files or lecture notes spread across different PDFs. Merging them into a single document makes it easier to organize study materials, submit assignments, and print documents. It's an essential utility for keeping your digital academic life tidy and professional.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free merge PDF tool helps students combine multiple PDF files quickly and easily. It works without login and supports all devices. Students can merge assignments, notes, and documents in seconds using this simple and fast tool. Our tool supports merging an unlimited number of files while maintaining high quality and security, ensuring your data never leaves your browser.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Summarise Notes Tool</a>
+                    <a href="resume-builder.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Resume Builder</a>
+                    <a href="text-to-voice.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Text to Speech Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const fileList = document.getElementById('file-list');
+        const actionArea = document.getElementById('action-area');
+        const mergeBtn = document.getElementById('merge-btn');
+        const loader = document.getElementById('loader');
+        const progressFill = document.getElementById('progress-fill');
+        const downloadArea = document.getElementById('download-area');
+        const downloadLink = document.getElementById('download-link');
+
+        let selectedFiles = [];
+
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#10b981';
+            dropZone.style.background = 'rgba(16, 185, 129, 0.05)';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+            dropZone.style.background = 'rgba(16, 185, 129, 0.02)';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            handleFiles(e.dataTransfer.files);
+        });
+
+        function handleFiles(files) {
+            const newFiles = Array.from(files).filter(f => f.type === 'application/pdf');
+            if (newFiles.length < files.length) {
+                alert('Only PDF files are allowed!');
+            }
+            selectedFiles = [...selectedFiles, ...newFiles];
+            renderFileList();
+        }
+
+        function renderFileList() {
+            fileList.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const item = document.createElement('div');
+                item.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(255,255,255,0.1); border-radius: 15px; border: 1px solid rgba(0,0,0,0.05);';
+                item.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-file-pdf" style="color: #ef4444; font-size: 1.2rem;"></i>
+                        <span style="font-weight: 600; color: var(--text-current);">${file.name}</span>
+                        <span style="font-size: 0.8rem; color: var(--text-current); opacity: 0.7;">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    </div>
+                    <button onclick="removeFile(${index})" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 5px;"><i class="fas fa-times"></i></button>
+                `;
+                fileList.appendChild(item);
+            });
+
+            actionArea.style.display = selectedFiles.length >= 1 ? 'block' : 'none';
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFileList();
+        }
+
+        mergeBtn.addEventListener('click', async () => {
+            if (selectedFiles.length < 2) {
+                alert('Please select at least 2 PDF files to merge.');
+                return;
+            }
+
+            actionArea.style.display = 'none';
+            fileList.style.display = 'none';
+            dropZone.style.display = 'none';
+            loader.style.display = 'block';
+            
+            try {
+                const { PDFDocument } = PDFLib;
+                const mergedPdf = await PDFDocument.create();
+                
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    const file = selectedFiles[i];
+                    const arrayBuffer = await file.arrayBuffer();
+                    const pdf = await PDFDocument.load(arrayBuffer);
+                    const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                    copiedPages.forEach((page) => mergedPdf.addPage(page));
+                    
+                    const progress = Math.round(((i + 1) / selectedFiles.length) * 100);
+                    progressFill.style.width = progress + '%';
+                }
+
+                const mergedPdfBytes = await mergedPdf.save();
+                const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                
+                downloadArea.style.display = 'block';
+                downloadLink.href = url;
+                downloadLink.download = 'merged_document.pdf';
+                loader.style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error merging PDFs:', error);
+                alert('An error occurred while merging the PDF files. Please try again.');
+                loader.style.display = 'none';
+                actionArea.style.display = 'block';
+                fileList.style.display = 'flex';
+                dropZone.style.display = 'block';
+            }
+        });
+    </script>
+    <style>
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(16, 185, 129, 0.1); border-top: 4px solid #10b981; border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .tag { background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #10b981; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

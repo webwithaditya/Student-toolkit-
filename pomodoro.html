@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Stay focused and study longer with our free online Pomodoro timer. Optimized for student productivity with custom study and break intervals.">
+    <meta name="keywords" content="pomodoro timer online free, study timer, productivity tool, tomato timer, student toolkit, free focus timer for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header" style="text-align: center;">
+                <div style="background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">⌛ Focus Enhancer</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Pomodoro Timer Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Study smarter, not harder, using the world-renowned Pomodoro technique.</p>
+            </div>
+
+            <div class="timer-display" style="text-align: center; margin: 40px 0;">
+                <div id="status-label" style="font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Study Time</div>
+                <div id="timer" style="font-size: 6rem; font-weight: 900; line-height: 1; color: var(--text-current); font-variant-numeric: tabular-nums;">25:00</div>
+            </div>
+
+            <div class="timer-controls" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 40px;">
+                <button id="start-btn" class="btn btn-primary" style="background: #ef4444; border: none; padding: 1.2rem 3rem; border-radius: 100px; font-weight: 800; font-size: 1.1rem; box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);">
+                    <i class="fas fa-play"></i> Start Study
+                </button>
+                <button id="reset-btn" class="btn" style="background: rgba(0,0,0,0.05); padding: 1.2rem 2.5rem; border-radius: 100px; border: 1px solid rgba(0,0,0,0.1); font-weight: 700;">
+                    <i class="fas fa-undo"></i> Reset
+                </button>
+            </div>
+
+            <div class="timer-settings" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; padding: 25px; background: rgba(0,0,0,0.02); border-radius: 20px; margin-bottom: 40px;">
+                <div style="text-align: center;">
+                    <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-current); opacity: 0.7; margin-bottom: 5px;">STUDY (MIN)</label>
+                    <input type="number" id="study-min" value="25" min="1" max="60" style="width: 60px; text-align: center; padding: 8px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); background: var(--bg-current);">
+                </div>
+                <div style="text-align: center;">
+                    <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-current); opacity: 0.7; margin-bottom: 5px;">BREAK (MIN)</label>
+                    <input type="number" id="break-min" value="5" min="1" max="30" style="width: 60px; text-align: center; padding: 8px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.1); background: var(--bg-current);">
+                </div>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our Pomodoro timer, set your desired study and break durations in the settings area. By default, it's set to the standard 25 minutes of study followed by a 5-minute break. Click "Start Study" to begin the countdown. Our tool will notify you when it's time to take a break or resume studying. It's a simple yet incredibly effective way to manage your time and maintain high focus levels.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>The Pomodoro technique is highly effective for students who struggle with procrastination or long-form studying. By breaking your day into small, manageable chunks, you can prevent burnout and maintain a high level of mental sharpness. Regular short breaks allow your brain to process information better and keep you refreshed throughout your entire study session.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free Pomodoro timer helps students manage their study time quickly and easily. It works without login and ensures that your productivity data stay private. Students can set their focus intervals and break times in seconds using this simple and fast tool. Our interface is designed to be distraction-free, helping you stay connected to your work without unnecessary interruptions.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(239, 68, 68, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="todo-list.html" class="tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">To-Do List Tool</a>
+                    <a href="study-planner.html" class="tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">Study Planner Tool</a>
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">Summarise Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let timer;
+        let timeLeft;
+        let isRunning = false;
+        let isStudyMode = true;
+
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('start-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const statusLabel = document.getElementById('status-label');
+        const studyInput = document.getElementById('study-min');
+        const breakInput = document.getElementById('break-min');
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.title = `(${timerDisplay.innerText}) Pomodoro Timer | Student Toolkit`;
+        }
+
+        function startTimer() {
+            if (isRunning) {
+                clearInterval(timer);
+                startBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+            } else {
+                if (!timeLeft) timeLeft = studyInput.value * 60;
+                
+                timer = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        isStudyMode = !isStudyMode;
+                        timeLeft = (isStudyMode ? studyInput.value : breakInput.value) * 60;
+                        statusLabel.innerText = isStudyMode ? "Study Time" : "Break Time";
+                        statusLabel.style.color = isStudyMode ? "#ef4444" : "#10b981";
+                        alert(isStudyMode ? "Break is over! Time to study." : "Study session over! Take a break.");
+                        startTimer();
+                    }
+                }, 1000);
+                startBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+            }
+            isRunning = !isRunning;
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        resetBtn.addEventListener('click', () => {
+            clearInterval(timer);
+            isRunning = false;
+            isStudyMode = true;
+            timeLeft = studyInput.value * 60;
+            statusLabel.innerText = "Study Time";
+            statusLabel.style.color = "#ef4444";
+            startBtn.innerHTML = '<i class="fas fa-play"></i> Start Study';
+            updateDisplay();
+            document.title = "Pomodoro Timer Online Free for Students | Student Toolkit";
+        });
+
+        studyInput.addEventListener('change', () => { if(!isRunning) { timeLeft = studyInput.value * 60; updateDisplay(); } });
+    </script>
+    <style>
+        .tag { background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #ef4444; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

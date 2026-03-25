@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Calculate your semester and cumulative GPA easily with our free online GPA calculator. Supports custom grades and credits. Perfect for student tracking.">
+    <meta name="keywords" content="gpa calculator online free, cgpa calculator, grade point average, student tools, student toolkit, free gpa tool for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header" style="text-align: center;">
+                <div style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">📉 Academic Tracker</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">GPA Calculator Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Track your academic performance and calculate your GPA instantly.</p>
+            </div>
+
+            <div id="calculator-area" style="margin-top: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-weight: 700;">Courses & Grades</h3>
+                    <button id="add-course" class="btn" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 100px; padding: 8px 20px;"><i class="fas fa-plus"></i> Add Course</button>
+                </div>
+
+                <div id="course-list" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">
+                    <!-- Course rows will go here -->
+                </div>
+
+                <div class="results-panel" style="background: rgba(16, 185, 129, 0.05); padding: 30px; border-radius: 20px; border: 1px solid rgba(16, 185, 129, 0.1); text-align: center;">
+                    <div style="font-size: 0.9rem; color: var(--text-current); opacity: 0.7; font-weight: 600; margin-bottom: 5px;">YOUR CALCULATED GPA</div>
+                    <div id="gpa-result" style="font-size: 3.5rem; font-weight: 800; color: #10b981;">0.00</div>
+                    <p id="grade-message" style="margin-top: 10px; font-weight: 600; color: var(--text-current);">Add your course grades to see results</p>
+                </div>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our GPA calculator, start by clicking "Add Course" for every subject in your semester. Enter the credit hours (weight) and the grade you received for each course. Our tool automatically calculates your Grade Point Average based on a 4.0 scale. You can add as many courses as you need to get an accurate representation of your academic standing. It's an essential tool for tracking your progress.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Knowing your GPA is essential for maintaining eligibility for scholarships, sports teams, and honors societies. By calculating your GPA early, you can identify which subjects need more focus and plan your study time accordingly. This free calculator helps you avoid manual math errors and gives you instant results so you can stay on top of your academic goals.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free GPA calculator helps students track their grades quickly and easily. It works without login and processes all calculations locally on your device for absolute privacy. Students can check their semester GPA and CGPA in seconds using this simple and fast tool. Our interface is designed to be user-friendly, allowing you to focus on your academic success rather than complex math.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="study-planner.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Study Planner Tool</a>
+                    <a href="pomodoro.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Pomodoro Timer</a>
+                    <a href="todo-list.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">To-Do List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const courseList = document.getElementById('course-list');
+        const addCourseBtn = document.getElementById('add-course');
+        const gpaResult = document.getElementById('gpa-result');
+        const gradeMessage = document.getElementById('grade-message');
+
+        const gradeValues = {
+            'A+': 4.0, 'A': 4.0, 'A-': 3.7,
+            'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+            'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+            'D+': 1.3, 'D': 1.0, 'F': 0.0
+        };
+
+        function addCourseRow() {
+            const row = document.createElement('div');
+            row.className = 'course-row';
+            row.style.cssText = 'display: grid; grid-template-columns: 2fr 1fr 1fr 40px; gap: 15px; align-items: center; animation: slideIn 0.3s ease-out;';
+            row.innerHTML = `
+                <input type="text" placeholder="Course Name" style="padding: 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.05);">
+                <input type="number" class="credits" placeholder="Credits" min="1" max="10" style="padding: 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.05);">
+                <select class="grade" style="padding: 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.05);">
+                    ${Object.keys(gradeValues).map(g => `<option value="${g}">${g}</option>`).join('')}
+                </select>
+                <button class="remove-row" style="background: none; border: none; color: #ef4444; font-size: 1.1rem; cursor: pointer;"><i class="fas fa-times"></i></button>
+            `;
+            courseList.appendChild(row);
+
+            row.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calculateGPA));
+            row.querySelector('.remove-row').addEventListener('click', () => {
+                row.remove();
+                calculateGPA();
+            });
+            
+            calculateGPA();
+        }
+
+        function calculateGPA() {
+            let totalPoints = 0;
+            let totalCredits = 0;
+            const creditsInputs = document.querySelectorAll('.credits');
+            const gradeInputs = document.querySelectorAll('.grade');
+
+            creditsInputs.forEach((input, i) => {
+                const credits = parseFloat(input.value);
+                const grade = gradeValues[gradeInputs[i].value];
+                if (!isNaN(credits) && credits > 0) {
+                    totalPoints += credits * grade;
+                    totalCredits += credits;
+                }
+            });
+
+            const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : "0.00";
+            gpaResult.innerText = gpa;
+
+            if (totalCredits === 0) {
+                gradeMessage.innerText = "Add your course grades to see results";
+                gradeMessage.style.color = "#64748b";
+            } else if (gpa >= 3.5) {
+                gradeMessage.innerText = "Excellent work! Deans List potential. 🌟";
+                gradeMessage.style.color = "#10b981";
+            } else if (gpa >= 3.0) {
+                gradeMessage.innerText = "Great job! Keep up the good work. 👍";
+                gradeMessage.style.color = "#3b82f6";
+            } else {
+                gradeMessage.innerText = "Keep studying and pushing for more! 💪";
+                gradeMessage.style.color = "#f59e0b";
+            }
+        }
+
+        addCourseBtn.addEventListener('click', addCourseRow);
+        
+        // Add initial rows
+        for(let i=0; i<3; i++) addCourseRow();
+    </script>
+    <style>
+        .tag { background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #10b981; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</body>
+</html>

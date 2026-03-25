@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarise Notes Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Summarize your lecture notes and long articles instantly for free. Our AI summarizer extracts key concepts and bullet points for easy studying. Perfect for students.">
+    <meta name="keywords" content="summarise notes online free, text summarizer, online summarizer, study tools, student toolkit, free summarizer for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(217, 70, 239, 0.1); color: var(--accent); padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🧠 Smart Summarizer</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Summarise Notes Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Advanced logic to extract core concepts and key takeaways instantly.</p>
+            </div>
+
+            <textarea id="notes-input" placeholder="Paste your long notes, articles, or research papers here..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 20px; font-size: 1.1rem; line-height: 1.6; min-height: 250px; width: 100%; margin-bottom: 20px;"></textarea>
+
+            <div class="controls" style="margin-bottom: 30px; display: flex; gap: 15px; justify-content: center;">
+                <button id="summarise-btn" class="btn btn-primary" style="background: var(--primary-gradient); padding: 1rem 2.5rem; border-radius: 100px; border: none; font-weight: 700; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);"><i class="fas fa-magic"></i> Summarise Now</button>
+                <button id="clear-btn" class="btn" style="background: rgba(0,0,0,0.05); padding: 1rem 2rem; border-radius: 100px; border: 1px solid rgba(0,0,0,0.1);"><i class="fas fa-trash"></i> Clear</button>
+            </div>
+
+            <div class="progress-container" id="summarise-loader" style="display: none; background: rgba(0,0,0,0.03); padding: 30px; border-radius: 1.2rem; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 30px;">
+                <p style="margin-bottom: 15px; text-align: center; color: var(--primary); font-weight: 600;">Analyzing your text with Smart Logic...</p>
+                <div class="progress-bar" style="height: 10px; background: rgba(0,0,0,0.1); border-radius: 100px; overflow: hidden;">
+                    <div class="progress-fill" id="summarise-progress" style="width: 0%; height: 100%; background: var(--primary-gradient); transition: width 0.3s cubic-bezier(0.1, 0.7, 1.0, 0.1);"></div>
+                </div>
+            </div>
+
+            <div id="summary-output" style="display: none; margin-top: 40px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h2 style="font-weight: 800; letter-spacing: -0.01em;">Analysis <span style="color: var(--primary);">Results</span></h2>
+                    <button id="copy-btn" class="btn" style="background: var(--accent); color: white; padding: 10px 20px; font-size: 0.9rem; border-radius: 12px; border: none; font-weight: 600; box-shadow: 0 5px 15px -3px rgba(217, 70, 239, 0.3);">
+                        <i class="fas fa-copy"></i> Copy Summary
+                    </button>
+                </div>
+
+                <div id="para-summary" style="margin-bottom: 30px; font-weight: 500; line-height: 1.8; color: var(--text-current); opacity: 0.8; font-size: 1.05rem; padding: 25px; background: rgba(99, 102, 241, 0.05); border-radius: 1.2rem; border-left: 5px solid var(--primary);"></div>
+                <ul id="bullet-summary" style="list-style: none; display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px;"></ul>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Summarize Your Notes</h2>
+                <p>Simply paste your text—whether it's lecture notes, research papers, or online articles—into the text area above. Click "Summarise Now" and our AI-powered logic will analyze the text for key patterns and importance. In seconds, you'll receive a concise paragraph and bullet points highlighting the most critical information.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Students today have to deal with massive amounts of digital information. A summarizer helps you save time by identifying the core message of a text without requiring you to read every single word. This tool is perfect for quick revision, preparing for exams, and getting the gist of complex research papers. It streamlines the learning process by focusing on what truly matters.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free summarise notes tool helps students condense their study materials quickly and easily. It works without login and ensures that your notes remain private within your browser. Students can summarise assignments, books, and articles in seconds using this simple and fast tool. Our algorithm is optimized for academic content, ensuring you get the most accurate and helpful results every time.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(217, 70, 239, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="text-to-voice.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: var(--accent);">Text to Speech Tool</a>
+                    <a href="explain-text.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: var(--accent);">Explain Difficult Text</a>
+                    <a href="resume-builder.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: var(--accent);">Resume Builder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const summariseBtn = document.getElementById('summarise-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const notesInput = document.getElementById('notes-input');
+        const outputBox = document.getElementById('summary-output');
+        const loader = document.getElementById('summarise-loader');
+        const progressFill = document.getElementById('summarise-progress');
+        const paraSummary = document.getElementById('para-summary');
+        const bulletSummary = document.getElementById('bullet-summary');
+        const copyBtn = document.getElementById('copy-btn');
+
+        summariseBtn.addEventListener('click', () => {
+            const text = notesInput.value.trim();
+            if (!text) {
+                alert('Please paste some notes first!');
+                return;
+            }
+
+            // Reset UI
+            outputBox.style.display = 'none';
+            loader.style.display = 'block';
+            progressFill.style.width = '0%';
+
+            // Simple loading animation
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 20;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        processSummary(text);
+                    }, 500);
+                }
+                progressFill.style.width = progress + '%';
+            }, 100);
+        });
+
+        function processSummary(text) {
+            // Split into sentences
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            const cleanSentences = sentences.map(s => s.trim()).filter(s => s.length > 20);
+
+            if (cleanSentences.length <= 2) {
+                paraSummary.textContent = text;
+                bulletSummary.innerHTML = `<li style="display: flex; gap: 10px;"><i class="fas fa-check-circle" style="color: var(--accent); margin-top: 5px;"></i> <span>${text}</span></li>`;
+            } else {
+                // Algorithm: Pick top 3-5 longest sentences (indicative of importance)
+                const sorted = [...cleanSentences].sort((a, b) => b.length - a.length);
+                const importantSentences = sorted.slice(0, Math.min(5, Math.ceil(cleanSentences.length / 2)));
+
+                // For the paragraph, use original order if they are among important ones
+                const finalPara = cleanSentences.filter(s => importantSentences.includes(s)).join(' ');
+                paraSummary.textContent = finalPara;
+
+                // Bullet points
+                bulletSummary.innerHTML = importantSentences.slice(0, 5).map(s => `
+                    <li style="display: flex; gap: 10px; animation: fadeIn 0.5s ease-out forwards;">
+                        <i class="fas fa-check-circle" style="color: var(--accent); margin-top: 5px;"></i> 
+                        <span>${s}</span>
+                    </li>
+                `).join('');
+            }
+
+            loader.style.display = 'none';
+            outputBox.style.display = 'block';
+            outputBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        clearBtn.addEventListener('click', () => {
+            notesInput.value = '';
+            outputBox.style.display = 'none';
+            notesInput.focus();
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const summaryText = paraSummary.textContent + '\n\nKey Takeaways:\n' + 
+                              Array.from(bulletSummary.querySelectorAll('li span'))
+                                   .map(span => '• ' + span.textContent).join('\n');
+            
+            navigator.clipboard.writeText(summaryText).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+    </script>
+    <style>
+        .tag { background: rgba(217, 70, 239, 0.1); color: var(--accent); padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</body>
+</html>

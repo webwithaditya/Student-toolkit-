@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Word Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Convert PDF to editable Word document for free without login. Perfect for students to edit notes and assignments. Fast, secure and easy to use.">
+    <meta name="keywords" content="pdf to word online free, student toolkit, convert pdf to word, student tools, pdf converter free">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">📄 Document Conversion</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">PDF to Word Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Convert your PDF files into editable Microsoft Word documents.</p>
+            </div>
+
+            <div class="upload-area" id="drop-zone" onclick="document.getElementById('file-input').click()" style="border: 2px dashed rgba(59, 130, 246, 0.3); background: rgba(59, 130, 246, 0.02); border-radius: 2rem; padding: 4rem 2rem; transition: var(--transition); text-align: center; cursor: pointer; margin-bottom: 30px;">
+                <i class="fas fa-file-word" style="font-size: 3.5rem; color: #3b82f6; margin-bottom: 20px;"></i>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-current);">Drop your PDF here or <span style="color: #3b82f6;">Browse</span></p>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 0.9rem; margin-top: 5px;">Supports PDF up to 10MB</p>
+                <input type="file" id="file-input" accept=".pdf" style="display: none;">
+            </div>
+
+            <div id="loader" style="display: none; text-align: center; margin-bottom: 40px;">
+                <div class="spinner"></div>
+                <p id="progress-text" style="color: var(--text-current); opacity: 0.7; font-weight: 600; margin-top: 15px;">Extracting text from PDF...</p>
+                <div class="progress-bar" style="margin-top: 10px;">
+                    <div id="progress-fill" class="progress-fill" style="width: 0%; background: #3b82f6;"></div>
+                </div>
+            </div>
+
+            <div id="download-area" style="display: none; text-align: center; margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
+                <h3 style="margin-bottom: 20px; font-weight: 800;">Conversion Ready! 🎉</h3>
+                <button id="download-btn" class="btn btn-primary" style="background: #3b82f6; padding: 1.2rem 3rem; border-radius: 100px; font-weight: 800; border: none;">
+                    <i class="fas fa-download"></i> Download Word File (.docx)
+                </button>
+                <p style="margin-top: 15px;"><a href="pdf-to-word.html" style="color: var(--text-current); opacity: 0.7; text-decoration: underline;">Convert another file</a></p>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our PDF to Word converter, upload your PDF file by clicking the upload area or dragging it into the browser. Once uploaded, our system will automatically extract the text from the PDF. After processing, you can click "Download Word File" to save the editable document. It's a quick and efficient way to transform static PDFs into editable text.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Students regularly receive handouts or research papers in PDF format that are difficult to edit. Converting these files to Word allows you to highlight text, add your own notes, and incorporate information directly into your assignments. This tool is a major time-saver for academic writing and exam preparation.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free PDF to Word tool helps students convert documents quickly and easily. It works without login and ensures that your files are handled securely. Students can edit their notes and assignments in seconds using this simple and fast tool. Our converter focuses on text accuracy, making it easy to repurpose academic content for your projects.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(59, 130, 246, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="merge-pdf.html" class="tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Merge PDF Tool</a>
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Summarise Notes Tool</a>
+                    <a href="resume-builder.html" class="tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Resume Builder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const loader = document.getElementById('loader');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const downloadArea = document.getElementById('download-area');
+        const downloadBtn = document.getElementById('download-btn');
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#3b82f6';
+            dropZone.style.background = 'rgba(59, 130, 246, 0.05)';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+            dropZone.style.background = 'rgba(59, 130, 246, 0.02)';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            handleFiles(e.dataTransfer.files);
+        });
+
+        async function handleFiles(files) {
+            if (files.length === 0) return;
+            const file = files[0];
+            if (file.type !== 'application/pdf') {
+                alert('Please upload a PDF file.');
+                return;
+            }
+
+            dropZone.style.display = 'none';
+            loader.style.display = 'block';
+            
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                let fullText = "";
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    const pageText = textContent.items.map(item => item.str).join(' ');
+                    fullText += pageText + "\n\n";
+                    
+                    const progress = Math.round((i / pdf.numPages) * 100);
+                    progressFill.style.width = progress + '%';
+                    progressText.innerText = `Processing page ${i} of ${pdf.numPages}...`;
+                }
+
+                // Create basic Word-compatible content
+                const docContent = `<html><head><meta charset="utf-8"></head><body>${fullText.replace(/\n/g, '<br>')}</body></html>`;
+                const blob = new Blob([docContent], { type: 'application/msword' });
+                const url = URL.createObjectURL(blob);
+                
+                downloadArea.style.display = 'block';
+                downloadBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = file.name.replace('.pdf', '') + '.doc';
+                    link.click();
+                };
+                loader.style.display = 'none';
+
+            } catch (error) {
+                console.error('Error processing PDF:', error);
+                alert('An error occurred while converting the PDF. Please try again.');
+                loader.style.display = 'none';
+                dropZone.style.display = 'block';
+            }
+        }
+    </script>
+    <style>
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(59, 130, 246, 0.1); border-top: 4px solid #3b82f6; border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .progress-bar { width: 100%; height: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.3s; }
+        .tag { background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #3b82f6; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

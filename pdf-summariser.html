@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Summary - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Extract text from PDF and summarize it automatically with Student Toolkit by webwithaditya.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+</head>
+
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="tool-container reveal">
+        <div class="tool-header">
+            <h1>📄 PDF → Text → Summarise</h1>
+            <p>Upload a PDF file to extract its content and get an instant summary.</p>
+        </div>
+
+        <div class="upload-area" id="drop-zone">
+            <i class="fas fa-file-upload"></i>
+            <h3>Click or Drag & Drop PDF here</h3>
+            <p>Maximum file size: 10MB</p>
+            <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+        </div>
+
+        <div id="file-info" style="display: none; margin-bottom: 20px; padding: 15px; background: rgba(99, 102, 241, 0.05); border-radius: 10px; display: flex; align-items: center; gap: 15px;">
+            <i class="fas fa-file-pdf" style="font-size: 1.5rem; color: #ef4444;"></i>
+            <span id="file-name" style="font-weight: 500;">Filename.pdf</span>
+            <button id="remove-file" style="margin-left: auto; background: none; border: none; color: #ef4444; cursor: pointer;"><i class="fas fa-times"></i></button>
+        </div>
+
+        <button id="process-btn" class="btn btn-primary" style="width: 100%;" disabled>Summarise PDF 🚀</button>
+
+        <div id="result-area" style="display: none; margin-top: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Summary Result ✅</h3>
+                <button id="copy-btn" class="btn btn-sm" style="border: 1px solid var(--border-color);"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div id="summary-output" style="padding: 24px; background: rgba(0,0,0,0.02); border-radius: 12px; border: 1px solid var(--border-color); line-height: 1.8;">
+                <!-- Summary will appear here -->
+            </div>
+        </div>
+
+        <!-- Try This Next Section -->
+        <div class="try-next reveal">
+            <h3>Try this next 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;"><i class="fas fa-layer-group"></i></div>
+                    <h3>Flashcard Generator</h3>
+                    <p>Turn your notes into interactive flashcards for better revision.</p>
+                    <a href="flashcards.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i class="fas fa-question-circle"></i></div>
+                    <h3>Important Questions</h3>
+                    <p>Generate key questions from your notes to prepare for exams.</p>
+                    <a href="important-questions.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loader-container" id="loader-overlay">
+        <div class="loader"></div>
+        <p id="loader-text">Extracting & Summarising...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileInfo = document.getElementById('file-info');
+        const fileName = document.getElementById('file-name');
+        const removeFile = document.getElementById('remove-file');
+        const processBtn = document.getElementById('process-btn');
+        const resultArea = document.getElementById('result-area');
+        const summaryOutput = document.getElementById('summary-output');
+        const loader = document.getElementById('loader-overlay');
+        const copyBtn = document.getElementById('copy-btn');
+
+        let currentFile = null;
+
+        dropZone.onclick = () => fileInput.click();
+
+        fileInput.onchange = (e) => handleFile(e.target.files[0]);
+
+        dropZone.ondragover = (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'var(--primary)';
+        };
+
+        dropZone.ondragleave = () => {
+            dropZone.style.borderColor = 'var(--border-color)';
+        };
+
+        dropZone.ondrop = (e) => {
+            e.preventDefault();
+            handleFile(e.dataTransfer.files[0]);
+        };
+
+        function handleFile(file) {
+            if (file && file.type === 'application/pdf') {
+                currentFile = file;
+                fileName.textContent = file.name;
+                fileInfo.style.display = 'flex';
+                dropZone.style.display = 'none';
+                processBtn.disabled = false;
+            } else {
+                alert('Please upload a valid PDF file.');
+            }
+        }
+
+        removeFile.onclick = () => {
+            currentFile = null;
+            fileInfo.style.display = 'none';
+            dropZone.style.display = 'block';
+            processBtn.disabled = true;
+            resultArea.style.display = 'none';
+            fileInput.value = '';
+        };
+
+        processBtn.onclick = async () => {
+            if (!currentFile) return;
+
+            loader.style.display = 'flex';
+            
+            try {
+                const reader = new FileReader();
+                reader.onload = async function() {
+                    const typedarray = new Uint8Array(this.result);
+                    const pdf = await pdfjsLib.getDocument(typedarray).promise;
+                    let fullText = '';
+                    
+                    for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
+                        const page = await pdf.getPage(i);
+                        const textContent = await page.getTextContent();
+                        fullText += textContent.items.map(item => item.str).join(' ') + '\n';
+                    }
+
+                    // Simulation of summarization logic
+                    const summary = simulateSummarize(fullText);
+                    
+                    setTimeout(() => {
+                        summaryOutput.innerHTML = summary;
+                        resultArea.style.display = 'block';
+                        loader.style.display = 'none';
+                        resultArea.scrollIntoView({ behavior: 'smooth' });
+                    }, 1500);
+                };
+                reader.readAsArrayBuffer(currentFile);
+            } catch (err) {
+                console.error(err);
+                alert('Error processing PDF.');
+                loader.style.display = 'none';
+            }
+        };
+
+        function simulateSummarize(text) {
+            const sentences = text.split(/[.!?]/).filter(s => s.trim().length > 20);
+            if (sentences.length === 0) return "Not enough content to summarize.";
+            
+            // Pick some "key" sentences (simulated)
+            const count = Math.min(sentences.length, 5);
+            let result = "<ul>";
+            for(let i=0; i<count; i++) {
+                result += `<li>${sentences[i].trim()}.</li>`;
+            }
+            result += "</ul>";
+            return result;
+        }
+
+        copyBtn.onclick = () => {
+            navigator.clipboard.writeText(summaryOutput.innerText);
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
+            setTimeout(() => {
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+            }, 2000);
+        };
+    </script>
+</body>
+
+</html>

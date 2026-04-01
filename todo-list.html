@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Free student tools by webwithaditya. Manage your assignments and daily goals with persistent task tracking.">
+    <meta name="keywords" content="todo list online free, student organizer, task manager, student toolkit, free study planner, daily tasks for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">✅ Task Mastery</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">To-Do List Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Manage your academic workload and never miss a deadline again.</p>
+            </div>
+
+            <div class="todo-input-group" style="display: flex; gap: 10px; margin-bottom: 30px; margin-top: 20px;">
+                <input type="text" id="todo-input" placeholder="Enter a new task (e.g. Finish Math Homework)..." style="flex: 1; padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.05); font-size: 1rem;">
+                <button id="add-btn" class="btn btn-primary" style="padding: 0 25px; border-radius: 12px; font-weight: 700; border: none;"><i class="fas fa-plus"></i> Add</button>
+            </div>
+
+            <ul id="todo-list" style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px;"></ul>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our online to-do list, enter your task into the input field above and click "Add". Your tasks will appear in a neat list below. You can mark tasks as completed by clicking the checkbox or remove them by clicking the trash icon. Our system uses local storage, so your tasks will be saved even if you close the browser. It's a reliable way to keep track of your daily academic goals.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Effective task management is the key to academic success. By listing out your assignments and study goals, you can reduce mental clutter and focus on one thing at a time. This to-do list helps students prioritize their work, track their progress, and enjoy the satisfaction of checking off completed items. It's perfect for managing long-term projects and daily homework alike.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free to-do list tool helps students manage their tasks quickly and easily. It works without login and ensures that your data stays private on your own device. Students can organize their study schedules and assignments in seconds using this simple and fast tool. Our interface is designed to be clean and distraction-free, helping you stay connected to what matters most: your education.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(99, 102, 241, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="study-planner.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Study Planner Tool</a>
+                    <a href="pomodoro.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Pomodoro Timer</a>
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Summarise Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const todoInput = document.getElementById('todo-input');
+        const addBtn = document.getElementById('add-btn');
+        const todoList = document.getElementById('todo-list');
+
+        let todos = JSON.parse(localStorage.getItem('student_toolkit_todos') || '[]');
+
+        function renderTodos() {
+            todoList.innerHTML = '';
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.style.cssText = 'display: flex; align-items: center; justify-content: space-between; padding: 18px 25px; background: var(--card-current); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; transition: var(--transition); box-shadow: var(--shadow); backdrop-filter: blur(10px);';
+                li.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <input type="checkbox" ${todo.completed ? 'checked' : ''} onchange="toggleTodo(${index})" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--primary);">
+                        <span style="${todo.completed ? 'text-decoration: line-through; opacity: 0.5;' : 'color: var(--text-current); font-weight: 600;'}">${todo.text}</span>
+                    </div>
+                    <button onclick="deleteTodo(${index})" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 5px;"><i class="fas fa-trash"></i></button>
+                `;
+                todoList.appendChild(li);
+            });
+            localStorage.setItem('student_toolkit_todos', JSON.stringify(todos));
+        }
+
+        addBtn.addEventListener('click', () => {
+            const text = todoInput.value.trim();
+            if (text) {
+                todos.push({ text, completed: false });
+                todoInput.value = '';
+                renderTodos();
+            }
+        });
+
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addBtn.click();
+        });
+
+        window.toggleTodo = (index) => {
+            todos[index].completed = !todos[index].completed;
+            renderTodos();
+        };
+
+        window.deleteTodo = (index) => {
+            todos.splice(index, 1);
+            renderTodos();
+        };
+
+        renderTodos();
+    </script>
+    <style>
+        .tag { background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

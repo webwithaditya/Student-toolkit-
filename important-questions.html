@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Questions Generator - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Generate exam questions from your notes with Student Toolkit by webwithaditya.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="tool-container reveal">
+        <div class="tool-header">
+            <h1>❓ Important Questions Generator</h1>
+            <p>Generate key questions from your notes to prepare for your exams effectively.</p>
+        </div>
+
+        <textarea id="notes-input" placeholder="Paste your notes here... (e.g., Photosynthesis is the process by which green plants make food...)"></textarea>
+        
+        <button id="generate-btn" class="btn btn-primary" style="width: 100%;">Generate Questions 🎯</button>
+
+        <div id="results-section" style="display: none; margin-top: 60px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Generated Questions</h3>
+                <button id="copy-btn" class="btn btn-sm" style="border: 1px solid var(--border-color);"><i class="fas fa-copy"></i> Copy All</button>
+            </div>
+            
+            <ul id="questions-list" style="padding-left: 20px; color: var(--text-current);">
+                <!-- Questions will appear here -->
+            </ul>
+        </div>
+
+        <!-- Try This Next Section -->
+        <div class="try-next reveal">
+            <h3>Try this next 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);"><i class="fas fa-pen-nib"></i></div>
+                    <h3>Lecture Notes Gen</h3>
+                    <p>Transform topics/keywords into structured, bulleted lecture notes.</p>
+                    <a href="lecture-notes.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-align-left"></i></div>
+                    <h3>Assignment Formatter</h3>
+                    <p>Auto-format your text with proper headings and spacing instantly.</p>
+                    <a href="assignment-formatter.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loader-container" id="loader-overlay">
+        <div class="loader"></div>
+        <p>Analyzing Notes & Generating Questions...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const notesInput = document.getElementById('notes-input');
+        const generateBtn = document.getElementById('generate-btn');
+        const questionsList = document.getElementById('questions-list');
+        const resultsSection = document.getElementById('results-section');
+        const copyBtn = document.getElementById('copy-btn');
+        const loader = document.getElementById('loader-overlay');
+
+        generateBtn.onclick = () => {
+            const text = notesInput.value.trim();
+            if (!text) {
+                alert('Please paste some notes first!');
+                return;
+            }
+
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                const questions = questionLogic(text);
+                if (questions.length === 0) {
+                    alert('Could not generate enough questions. Try adding more detailed notes.');
+                    loader.style.display = 'none';
+                    return;
+                }
+
+                questionsList.innerHTML = questions.map(q => `<li style="margin-bottom: 15px; font-weight: 500;">${q}</li>`).join('');
+                resultsSection.style.display = 'block';
+                loader.style.display = 'none';
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1200);
+        };
+
+        function questionLogic(text) {
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            const questions = [];
+
+            sentences.forEach(s => {
+                const trimmed = s.trim();
+                if (trimmed.length < 30) return;
+
+                // Extraction logic
+                if (trimmed.toLowerCase().includes(' is ')) {
+                    const parts = trimmed.split(/ is /i);
+                    questions.push(`Explain the concept of ${parts[0]}.`);
+                    questions.push(`Define "${parts[0]}" and discuss its significance.`);
+                } else if (trimmed.toLowerCase().includes(' consists of ')) {
+                    const parts = trimmed.split(/ consists of /i);
+                    questions.push(`What are the components that ${parts[0]} consists of?`);
+                } else if (trimmed.toLowerCase().includes(' because ')) {
+                    const parts = trimmed.split(/ because /i);
+                    questions.push(`Why does ${parts[0]}?`);
+                } else if (trimmed.toLowerCase().includes(' led to ')) {
+                    const parts = trimmed.split(/ led to /i);
+                    questions.push(`Discuss the factors that led to ${parts[1]}.`);
+                } else {
+                    // General question if no keyword found
+                    const words = trimmed.split(' ');
+                    if(words.length > 5) {
+                        questions.push(`Summarise the importance of "${words.slice(0, 3).join(' ')}..." mentioned in the text.`);
+                    }
+                }
+            });
+
+            // Return unique and limited results
+            return [...new Set(questions)].slice(0, 10);
+        }
+
+        copyBtn.onclick = () => {
+            const text = Array.from(questionsList.querySelectorAll('li')).map(li => li.innerText).join('\n');
+            navigator.clipboard.writeText(text);
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
+            setTimeout(() => {
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy All';
+            }, 2000);
+        };
+    </script>
+</body>
+
+</html>

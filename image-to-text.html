@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Text (OCR) - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Free student tools by webwithaditya. Extract text from images and screenshots instantly with advanced OCR.">
+    <meta name="keywords" content="image to text online free, ocr online, extract text from image, student toolkit, free ocr tool for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">📸 Instant OCR</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Image to Text Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Extract text from images and screenshots instantly with advanced OCR.</p>
+            </div>
+
+            <div class="upload-area" id="drop-zone" onclick="document.getElementById('file-input').click()" style="border: 2px dashed rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.02); border-radius: 2rem; padding: 4rem 2rem; transition: var(--transition); text-align: center; cursor: pointer; margin-bottom: 30px;">
+                <i class="fas fa-camera" style="font-size: 3.5rem; color: #f59e0b; margin-bottom: 20px;"></i>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-current);">Drop image or <span style="color: #f59e0b;">Capture</span></p>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 0.9rem; margin-top: 5px;">Supports PNG, JPG, JPEG</p>
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+            </div>
+
+            <div id="loader" style="display: none; text-align: center; margin-bottom: 40px;">
+                <div class="spinner"></div>
+                <p id="progress-text" style="color: var(--text-current); opacity: 0.7; font-weight: 600; margin-top: 15px;">Scanning text pixels...</p>
+                <div class="progress-bar" style="margin-top: 15px;">
+                    <div id="progress-fill" class="progress-fill" style="width: 0%; background: #f59e0b;"></div>
+                </div>
+            </div>
+
+            <div id="result-container" style="display: none; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                    <h2 style="font-weight: 800; letter-spacing: -0.01em;">Extracted <span style="color: #f59e0b;">Text</span></h2>
+                    <button id="copy-btn" class="btn" style="background: #f59e0b; color: white; padding: 10px 20px; font-size: 0.9rem; border-radius: 12px; border: none; font-weight: 600;">
+                        <i class="fas fa-copy"></i> Copy Text
+                    </button>
+                </div>
+                <div id="text-output" style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.1); border-radius: 1.2rem; padding: 25px; font-size: 1.1rem; line-height: 1.8; color: var(--text-current); min-height: 200px; white-space: pre-wrap;"></div>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our online OCR tool, upload an image of your notes or textbooks by clicking the upload area or dragging your file into the browser. Once the image is processed, the system will start scanning for characters automatically. After a few seconds, the extracted text will appear in the result area. You can then copy this text for your digital notes or research papers. It's a seamless way to digitize analog information.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Digitizing handwritten or printed notes is a major challenge for students. This Image to Text tool helps you quickly convert snapshots from textbooks or whiteboard photos into editable digital text. It makes searching through your notes much easier and saves hours of manual re-typing. It's an essential utility for anyone looking to build a digital study library from physical documents.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free image to text tool helps students extract text from images quickly and easily. It works without login and uses powerful OCR technology entirely within your browser for complete privacy. Students can convert photos to text in seconds using this simple and fast tool. Our tool supports multiple image formats and ensures high accuracy for academic and professional documents.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(245, 158, 11, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">Try this next:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="pdf-to-word.html" class="tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">PDF to Word Tool</a>
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">Summarise Notes</a>
+                    <a href="explain-text.html" class="tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">Explain Text Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="https://unpkg.com/tesseract.js@v4.0.1/dist/tesseract.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const loader = document.getElementById('loader');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const textOutput = document.getElementById('text-output');
+        const resultContainer = document.getElementById('result-container');
+        const copyBtn = document.getElementById('copy-btn');
+
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.style.borderColor = '#f59e0b'; });
+        dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = 'rgba(245, 158, 11, 0.3)'; });
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); handleFiles(e.dataTransfer.files); });
+
+        async function handleFiles(files) {
+            if (files.length === 0) return;
+            const file = files[0];
+            if (!file.type.startsWith('image/')) {
+                alert('Please upload an image file.');
+                return;
+            }
+
+            dropZone.style.display = 'none';
+            resultContainer.style.display = 'none';
+            loader.style.display = 'block';
+
+            try {
+                const worker = await Tesseract.createWorker({
+                    logger: m => {
+                        if (m.status === 'recognizing text') {
+                            const prog = Math.round(m.progress * 100);
+                            progressFill.style.width = prog + '%';
+                            progressText.innerText = `Extracting: ${prog}%`;
+                        }
+                    }
+                });
+
+                await worker.loadLanguage('eng');
+                await worker.initialize('eng');
+                const { data: { text } } = await worker.recognize(file);
+                
+                textOutput.innerText = text;
+                await worker.terminate();
+
+                loader.style.display = 'none';
+                resultContainer.style.display = 'block';
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('OCR Error:', error);
+                alert('Failed to extract text. Please try again.');
+                loader.style.display = 'none';
+                dropZone.style.display = 'block';
+            }
+        }
+
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(textOutput.innerText).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => copyBtn.innerHTML = originalText, 2000);
+            });
+        });
+    </script>
+    <style>
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(245, 158, 11, 0.1); border-top: 4px solid #f59e0b; border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .progress-bar { width: 100%; height: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.3s; }
+        .tag { background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #f59e0b; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

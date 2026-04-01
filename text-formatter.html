@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Formatter Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Format your text instantly for free. uppercase, lowercase, remove extra spaces, and more. Perfect for students to clean up notes and citations. Fast and easy.">
+    <meta name="keywords" content="text formatter online free, change case, remove spaces, student toolkit, free writing tools for students, online text repair">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(217, 70, 239, 0.1); color: #d946ef; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🔧 Text Optimization</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Text Formatter Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Clean, transform, and polish your text instantly with one-click formatting tools.</p>
+            </div>
+
+            <textarea id="text-input" placeholder="Paste your text here to format it..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 25px; font-size: 1.1rem; line-height: 1.8; min-height: 200px; width: 100%; margin-bottom: 25px; color: var(--text-current);"></textarea>
+
+            <div class="action-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
+                <button onclick="format('upper')" class="btn" style="background: rgba(217, 70, 239, 0.05); color: #d946ef; padding: 12px; border-radius: 12px; border: 1px solid rgba(217, 70, 239, 0.1); font-weight: 700;">UPPERCASE</button>
+                <button onclick="format('lower')" class="btn" style="background: rgba(217, 70, 239, 0.05); color: #d946ef; padding: 12px; border-radius: 12px; border: 1px solid rgba(217, 70, 239, 0.1); font-weight: 700;">lowercase</button>
+                <button onclick="format('sentence')" class="btn" style="background: rgba(217, 70, 239, 0.05); color: #d946ef; padding: 12px; border-radius: 12px; border: 1px solid rgba(217, 70, 239, 0.1); font-weight: 700;">Sentence case</button>
+                <button onclick="format('clean')" class="btn" style="background: rgba(217, 70, 239, 0.05); color: #d946ef; padding: 12px; border-radius: 12px; border: 1px solid rgba(217, 70, 239, 0.1); font-weight: 700;">Clean Spaces</button>
+                <button id="copy-btn" class="btn btn-primary" style="background: var(--primary-gradient); padding: 12px; border-radius: 12px; border: none; font-weight: 700;"><i class="fas fa-copy"></i> Copy Result</button>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our text formatter, enter your content into the main input box. You can then select from various formatting options like converting to uppercase, lowercase, or sentence case. We also provide a "Clean Spaces" feature that removes extra whitespaces and tabs from your text. Once you're happy with the result, use the "Copy Result" button to save it back to your clipboard. It's an essential utility for refining your student notes.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Students often have to deal with messy text copied from various online sources or digital PDFs. Formatting issues like inconsistent capitalization or extra spaces can make your assignments look unprofessional. This tool helps you quickly clean up your content, ensuring a uniform look for your research papers and study guides. It saves you the manual effort of correcting every single line yourself.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free text formatter helps students clean their notes quickly and easily. It works without login and processes all text locally on your device for absolute privacy. Students can fix their assignments and research papers in seconds using this simple and fast tool. our interface is designed to be high-performance and intuitive, helping you maintain a polished academic standard without any technical hassle.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(217, 70, 239, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;">Summarise Notes Tool</a>
+                    <a href="word-counter.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;">Word Counter Tool</a>
+                    <a href="explain-text.html" class="tag" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;">Explain Difficult Text</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const input = document.getElementById('text-input');
+        const copyBtn = document.getElementById('copy-btn');
+
+        function format(type) {
+            let val = input.value;
+            if(!val) return;
+
+            switch(type) {
+                case 'upper': input.value = val.toUpperCase(); break;
+                case 'lower': input.value = val.toLowerCase(); break;
+                case 'sentence': 
+                    input.value = val.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, c => c.toUpperCase());
+                    break;
+                case 'clean': input.value = val.replace(/\s+/g, ' ').trim(); break;
+            }
+        }
+
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(input.value).then(() => {
+                const old = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => copyBtn.innerHTML = old, 1500);
+            });
+        });
+    </script>
+    <style>
+        .tag { background: rgba(217, 70, 239, 0.1); color: #d946ef; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #d946ef; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+        .action-grid button:hover { background: #d946ef !important; color: white !important; transform: translateY(-2px); }
+    </style>
+</body>
+</html>

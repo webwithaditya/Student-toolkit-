@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter Online Free for Students | Student Toolkit</title>
+    <meta name="description" content="Count words, characters, and sentences in your essay for free. Get real-time analysis and estimated reading time. Perfect for student assignments.">
+    <meta name="keywords" content="word counter online free, character count, essay length checker, student toolkit, free writing tools for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i> Student<span>Toolkit</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">✍️ Writing Assistant</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Word Counter Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Instant analysis of your writing, including word count, character count, and readability.</p>
+            </div>
+
+            <textarea id="text-input" placeholder="Type or paste your essay content here..." style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0,0,0,0.1); border-radius: 1.2rem; padding: 25px; font-size: 1.1rem; line-height: 1.8; min-height: 250px; width: 100%; margin-bottom: 25px; color: var(--text-current);"></textarea>
+
+            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-bottom: 40px;">
+                <div style="background: rgba(0,0,0,0.02); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+                    <div id="word-count" style="font-size: 2rem; font-weight: 800; color: #10b981;">0</div>
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-current); opacity: 0.7; text-transform: uppercase;">Words</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.02); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+                    <div id="char-count" style="font-size: 2rem; font-weight: 800; color: #3b82f6;">0</div>
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-current); opacity: 0.7; text-transform: uppercase;">Characters</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.02); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+                    <div id="sentence-count" style="font-size: 2rem; font-weight: 800; color: #f59e0b;">0</div>
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-current); opacity: 0.7; text-transform: uppercase;">Sentences</div>
+                </div>
+                <div style="background: rgba(0,0,0,0.02); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid rgba(0,0,0,0.05);">
+                    <div id="read-time" style="font-size: 2rem; font-weight: 800; color: #d946ef;">0</div>
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-current); opacity: 0.7; text-transform: uppercase;">Min Read</div>
+                </div>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our word counter, simply type or paste your text into the area above. The tool will automatically calculate the count in real-time as you type. You can see the word, character, and sentence counts instantly. We also provide an estimated reading time based on average reading speeds. It's a fast and efficient way to ensure your assignments meet the required length requirements.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Most student assignments have strict word count limits. This tool helps you keep track of your progress without having to manually check within a document editor. It allows you to monitor your essay's density and ensures you're providing enough detail without exceeding limits. The real-time feedback loop makes writing much smoother and helps in managing your academic workload effectively.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free word counter helps students track their essay length quickly and easily. It works without login and processes all text locally on your device for complete privacy. Students can analyze their writing in seconds using this simple and fast tool. Our tool is optimized for academic writing, providing accurate metrics that help you polish your assignments and reach your academic goals faster.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(16, 185, 129, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">You may also like:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="text-formatter.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Text Formatter Tool</a>
+                    <a href="keyword-extractor.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Keyword Extractor Tool</a>
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Summarise Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>Student Toolkit by <b>WebWithAditya</b></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-current); opacity: 0.7;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const textInput = document.getElementById('text-input');
+        const wordDisplay = document.getElementById('word-count');
+        const charDisplay = document.getElementById('char-count');
+        const sentenceDisplay = document.getElementById('sentence-count');
+        const timeDisplay = document.getElementById('read-time');
+
+        textInput.addEventListener('input', () => {
+            const text = textInput.value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            const chars = text.length;
+            const sentences = text ? (text.match(/[.!?]+/g) || []).length : 0;
+            const minutes = Math.ceil(words / 200);
+
+            wordDisplay.innerText = words;
+            charDisplay.innerText = chars;
+            sentenceDisplay.innerText = sentences || (text ? 1 : 0);
+            timeDisplay.innerText = text ? minutes : 0;
+        });
+    </script>
+    <style>
+        .tag { background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #10b981; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+    </style>
+</body>
+</html>

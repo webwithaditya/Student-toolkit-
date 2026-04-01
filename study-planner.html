@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Free student tools by webwithaditya. Generate a customized study schedule for your exams and daily tasks.">
+    <meta name="keywords" content="study planner online free, exam schedule generator, student organizer, student toolkit, free study tools for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">📅 Academic Scheduler</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Study Planner Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Organize your study sessions and crush your exams with a professional daily planner.</p>
+            </div>
+
+            <form id="planner-form" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; background: rgba(59, 130, 246, 0.03); padding: 30px; border-radius: 2rem; border: 1px solid rgba(59, 130, 246, 0.1);">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label style="display: block; font-weight: 700; margin-bottom: 8px; color: var(--text-current); opacity: 0.8;">Subjects to Study (separated by commas)</label>
+                    <input type="text" id="subjects" placeholder="Mathematics, Quantum Physics, Organic Chemistry, World History" required style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: white;">
+                </div>
+                <div class="form-group">
+                    <label style="display: block; font-weight: 700; margin-bottom: 8px; color: var(--text-current); opacity: 0.8;">Exam Start Date</label>
+                    <input type="date" id="exam-date" required style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: white;">
+                </div>
+                <div class="form-group">
+                    <label style="display: block; font-weight: 700; margin-bottom: 8px; color: var(--text-current); opacity: 0.8;">Target Study Hours / Day</label>
+                    <input type="number" id="study-hours" min="1" max="18" value="6" required style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: white;">
+                </div>
+                <div style="grid-column: 1 / -1; text-align: center; margin-top: 10px;">
+                    <button type="submit" class="btn btn-primary" style="background: var(--primary-gradient); width: 100%; max-width: 400px; padding: 1.2rem; border-radius: 100px; border: none; font-weight: 800; font-size: 1.1rem; box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.4);">
+                        <i class="fas fa-calendar-check"></i> Generate My Professional Plan
+                    </button>
+                </div>
+            </form>
+
+            <div id="planner-result" style="display: none; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; animation: slideUp 0.6s ease-out;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h2 style="font-weight: 800; letter-spacing: -0.01em; font-size: 2rem;">Today's <span style="color: #3b82f6;">Planner</span></h2>
+                        <p style="color: var(--text-current); opacity: 0.7; font-weight: 500;" id="planner-date-display"></p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="copy-btn" class="btn" style="background: rgba(0,0,0,0.05); padding: 10px 20px; border-radius: 12px; font-weight: 600; border: 1px solid rgba(0,0,0,0.05);"><i class="fas fa-copy"></i> Copy</button>
+                        <button id="print-btn" class="btn btn-primary" style="background: #10b981; padding: 10px 20px; border-radius: 12px; font-weight: 600; border: none;"><i class="fas fa-print"></i> Print Plan</button>
+                    </div>
+                </div>
+
+                <div id="planner-timeline" style="display: flex; flex-direction: column; gap: 20px; position: relative;">
+                    <!-- Vertical line for timeline -->
+                    <div style="position: absolute; left: 20px; top: 10px; bottom: 10px; width: 2px; background: rgba(59, 130, 246, 0.2); z-index: 0;"></div>
+                    
+                    <div id="timeline-content" style="position: relative; z-index: 1;">
+                        <!-- Planner items will go here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To generate your study plan, enter the names of your subjects separated by commas. Select your upcoming exam start date and the amount of hours you can realistically dedicate to studying each day. Click "Generate My Plan" to receive a structured daily schedule. You can copy the schedule or download it for offline use. It's a quick way to organize your academic calendar.</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>A well-structured study plan reduces anxiety and helps students stay focused on their goals. It ensures all subjects are covered before exams and prevents last-minute cramming. By allocating specific time slots for each subject, students can improve their productivity and time management skills significantly. Regular breaks are included to ensure a balanced and sustainable study routine.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free study planner tool helps students organize their exam schedules quickly and easily. It works without login and processes all data safely within your browser session. Students can generate a custom daily planner in seconds using this simple and fast tool. Our algorithm balances core study sessions with necessary breaks, helping you maintain peak performance throughout your exam season.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(59, 130, 246, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">Try this next:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="todo-list.html" class="tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">To-Do List Tool</a>
+                    <a href="pomodoro.html" class="tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Pomodoro Timer</a>
+                    <a href="summarise-notes.html" class="tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Summarise Notes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const plannerForm = document.getElementById('planner-form');
+        const plannerResult = document.getElementById('planner-result');
+        const timelineContent = document.getElementById('timeline-content');
+        const dateDisplay = document.getElementById('planner-date-display');
+        const copyBtn = document.getElementById('copy-btn');
+        const printBtn = document.getElementById('print-btn');
+
+        plannerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const subjectsInput = document.getElementById('subjects').value.split(',').map(s => s.trim()).filter(s => s);
+            const hours = parseInt(document.getElementById('study-hours').value);
+            const examDate = document.getElementById('exam-date').value;
+
+            if (subjectsInput.length === 0) {
+                alert('Please enter at least one subject!');
+                return;
+            }
+
+            const today = new Date();
+            dateDisplay.innerText = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            
+            generateTimeline(subjectsInput, hours);
+            plannerResult.style.display = 'block';
+            plannerResult.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function generateTimeline(subjects, totalHours) {
+            timelineContent.innerHTML = '';
+            let currentHour = 8; // Start at 8 AM
+            
+            const schedule = [];
+            
+            // Morning Routine
+            schedule.push({
+                time: "08:00 AM",
+                icon: "fa-sun",
+                color: "#f59e0b",
+                title: "Morning Routine & Goal Setting",
+                description: "Review today's objectives and prepare study materials.",
+                type: "Review"
+            });
+
+            currentHour = 9;
+            let subjectIndex = 0;
+            
+            for (let i = 0; i < totalHours; i++) {
+                const subject = subjects[subjectIndex % subjects.length];
+                const timeStr = formatHour(currentHour);
+                
+                schedule.push({
+                    time: timeStr,
+                    icon: "fa-book-open",
+                    color: "#3b82f6",
+                    title: `Study Session: ${subject}`,
+                    description: i % 2 === 0 ? "Focus on core concepts and theory." : "Solve problems and practice questions.",
+                    type: "Study"
+                });
+
+                currentHour++;
+
+                // Break after every 2 hours of study
+                if ((i + 1) % 2 === 0 && i < totalHours - 1) {
+                    schedule.push({
+                        time: formatHour(currentHour),
+                        icon: "fa-coffee",
+                        color: "#10b981",
+                        title: "Short Break",
+                        description: "Stretch, hydrate, and rest your eyes.",
+                        type: "Break"
+                    });
+                    currentHour++;
+                }
+
+                if ((i+1) % Math.ceil(totalHours/subjects.length) === 0) {
+                    subjectIndex++;
+                }
+            }
+
+            // Evening Review
+            schedule.push({
+                time: formatHour(currentHour),
+                icon: "fa-check-double",
+                color: "#8b5cf6",
+                title: "Daily Reflection",
+                description: "Summarize what you learned and plan for tomorrow.",
+                type: "Review"
+            });
+
+            schedule.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'planner-card reveal';
+                card.style.cssText = `
+                    display: flex; 
+                    gap: 20px; 
+                    margin-bottom: 25px; 
+                    position: relative; 
+                    animation: fadeIn 0.5s ease-out forwards;
+                    animation-delay: ${index * 0.1}s;
+                `;
+
+                card.innerHTML = `
+                    <div style="flex-shrink: 0; width: 42px; height: 42px; background: var(--card-current); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid ${item.color}; z-index: 2; box-shadow: 0 4px 15px rgba(0,0,0,0.2); backdrop-filter: blur(5px);">
+                        <i class="fas ${item.icon}" style="color: ${item.color}; font-size: 1rem;"></i>
+                    </div>
+                    <div style="background: var(--card-current); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); box-shadow: var(--shadow); flex: 1; position: relative; overflow: hidden; backdrop-filter: blur(20px);">
+                        <div style="position: absolute; left: 0; top: 0; width: 6px; height: 100%; background: ${item.color};"></div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                            <span style="font-weight: 800; color: var(--text-current); font-size: 0.85rem; text-transform: uppercase; opacity: 0.8; letter-spacing: 1px;">${item.time}</span>
+                            <span style="background: ${item.color}20; color: ${item.color}; padding: 5px 15px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; border: 1px solid ${item.color}30;">${item.type}</span>
+                        </div>
+                        <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--text-current); margin-bottom: 8px;">${item.title}</h4>
+                        <p style="color: var(--text-current); opacity: 0.7; font-size: 0.95rem; line-height: 1.6;">${item.description}</p>
+                        <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05);">
+                            <input type="checkbox" id="check-${index}" style="width: 20px; height: 20px; cursor: pointer; accent-color: ${item.color};">
+                            <label for="check-${index}" style="font-size: 0.85rem; font-weight: 600; color: var(--text-current); opacity: 0.5; cursor: pointer;">Mark as complete</label>
+                        </div>
+                    </div>
+                `;
+                timelineContent.appendChild(card);
+
+                const checkbox = card.querySelector('input');
+                checkbox.addEventListener('change', () => {
+                    const title = card.querySelector('h4');
+                    if (checkbox.checked) {
+                        card.style.opacity = '0.6';
+                        title.style.textDecoration = 'line-through';
+                    } else {
+                        card.style.opacity = '1';
+                        title.style.textDecoration = 'none';
+                    }
+                });
+            });
+        }
+
+        function formatHour(h) {
+            const suffix = h >= 12 ? "PM" : "AM";
+            const hour = h > 12 ? h - 12 : h;
+            return `${hour.toString().padStart(2, '0')}:00 ${suffix}`;
+        }
+
+        copyBtn.addEventListener('click', () => {
+            const planText = Array.from(timelineContent.querySelectorAll('.planner-card')).map(card => {
+                const time = card.querySelector('span:first-child').innerText;
+                const title = card.querySelector('h4').innerText;
+                const desc = card.querySelector('p').innerText;
+                return `[${time}] ${title}\n${desc}\n`;
+            }).join('\n');
+
+            navigator.clipboard.writeText(`STUDY PLAN - ${dateDisplay.innerText}\n\n${planText}`).then(() => {
+                const original = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => copyBtn.innerHTML = original, 2000);
+            });
+        });
+
+        printBtn.addEventListener('click', () => {
+            window.print();
+        });
+    </script>
+    <style>
+        .tag { background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: #3b82f6; color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media print {
+            .no-print, nav, footer, .internal-links, .seo-content, form { display: none !important; }
+            body { background: white !important; }
+            .container { padding: 0 !important; max-width: 100% !important; }
+            .tool-container { background: white !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
+            .planner-card { break-inside: avoid; opacity: 1 !important; transform: none !important; animation: none !important; }
+            h2 { margin-bottom: 15px !important; }
+        }
+    </style>
+</body>
+</html>

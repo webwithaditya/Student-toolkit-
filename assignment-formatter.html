@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Formatter - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Auto-format your assignments and essays with Student Toolkit by webwithaditya.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="tool-container reveal">
+        <div class="tool-header">
+            <h1>🧾 Assignment Formatter</h1>
+            <p>Paste your messy text and we will auto-format it into a structured, professional document.</p>
+        </div>
+
+        <textarea id="format-input" placeholder="Paste your text here..."></textarea>
+        
+        <button id="format-btn" class="btn btn-primary" style="width: 100%;">Auto Format Assignment ✨</button>
+
+        <div id="results-section" style="display: none; margin-top: 60px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Formatted Content</h3>
+                <button id="copy-btn" class="btn btn-sm" style="border: 1px solid var(--border-color);"><i class="fas fa-copy"></i> Copy Content</button>
+            </div>
+            
+            <div id="format-output" style="padding: 40px; background: white; color: black; border-radius: 8px; border: 1px solid var(--border-color); line-height: 1.8; font-family: 'Times New Roman', serif;">
+                <!-- Formatted content will appear here -->
+            </div>
+        </div>
+
+        <!-- Try This Next Section -->
+        <div class="try-next reveal">
+            <h3>Try this next 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);"><i class="fas fa-sort-numeric-up"></i></div>
+                    <h3>Word Counter</h3>
+                    <p>Real-time word, character, and reading time analysis for your essays.</p>
+                    <a href="word-counter.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);"><i class="fas fa-brain"></i></div>
+                    <h3>Explain Difficult Text</h3>
+                    <p>Break down complex language into easy bullet points for better understanding.</p>
+                    <a href="explain-text.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loader-container" id="loader-overlay">
+        <div class="loader"></div>
+        <p>Formatting Assignment...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const formatInput = document.getElementById('format-input');
+        const formatBtn = document.getElementById('format-btn');
+        const formatOutput = document.getElementById('format-output');
+        const resultsSection = document.getElementById('results-section');
+        const copyBtn = document.getElementById('copy-btn');
+        const loader = document.getElementById('loader-overlay');
+
+        formatBtn.onclick = () => {
+            const text = formatInput.value.trim();
+            if (!text) {
+                alert('Please paste some text first!');
+                return;
+            }
+
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                formatOutput.innerHTML = formatLogic(text);
+                resultsSection.style.display = 'block';
+                loader.style.display = 'none';
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
+        };
+
+        function formatLogic(text) {
+            // Split into paragraphs
+            const paragraphs = text.split(/\n+/).filter(p => p.trim());
+            let html = "";
+
+            paragraphs.forEach((p, index) => {
+                const trimmed = p.trim();
+                
+                // If it looks like a heading (short, no punctuation at end, capitalized)
+                if (trimmed.length < 50 && !/[.!?]$/.test(trimmed) && trimmed[0] === trimmed[0].toUpperCase()) {
+                    html += `<h2 style="margin-top: 25px; margin-bottom: 15px; text-decoration: underline;">${trimmed}</h2>`;
+                } else {
+                    // Normalize spacing and capitalization
+                    let formattedP = trimmed.replace(/\s+/g, ' ');
+                    formattedP = formattedP.charAt(0).toUpperCase() + formattedP.slice(1);
+                    
+                    html += `<p style="margin-bottom: 15px; text-align: justify;">${formattedP}</p>`;
+                }
+            });
+
+            return html || "Formatting error.";
+        }
+
+        copyBtn.onclick = () => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = formatOutput.innerHTML;
+            const text = tempDiv.innerText;
+            navigator.clipboard.writeText(text);
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
+            setTimeout(() => {
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Content';
+            }, 2000);
+        };
+    </script>
+</body>
+
+</html>

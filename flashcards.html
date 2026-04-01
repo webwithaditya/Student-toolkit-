@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Generator - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Generate interactive flashcards from your notes with Student Toolkit by webwithaditya.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .flashcard-wrapper {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 40px auto;
+            cursor: pointer;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-current);
+            box-shadow: var(--shadow);
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .card-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        .flashcard-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .counter {
+            font-weight: 600;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="tool-container reveal">
+        <div class="tool-header">
+            <h1>🧠 Flashcard Generator</h1>
+            <p>Paste your notes below to generate interactive flashcards for study.</p>
+        </div>
+
+        <textarea id="notes-input" placeholder="Paste your notes here (e.g., Photosynthesis is the process... Parthenogenesis is...)"></textarea>
+        
+        <button id="generate-btn" class="btn btn-primary" style="width: 100%;">Generate Flashcards ✨</button>
+
+        <div id="flashcard-section" style="display: none; margin-top: 60px;">
+            <div class="flashcard-wrapper" id="card-wrapper">
+                <div class="flashcard" id="card">
+                    <div class="card-face card-front">
+                        <span class="card-label">Front</span>
+                        <div id="front-text">Question appear here</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <span class="card-label">Back</span>
+                        <div id="back-text">Answer appear here</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard-nav">
+                <button id="prev-btn" class="btn btn-sm" style="border: 1px solid var(--border-color);"><i class="fas fa-chevron-left"></i></button>
+                <span class="counter" id="card-counter">1 / 10</span>
+                <button id="next-btn" class="btn btn-sm" style="border: 1px solid var(--border-color);"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px; opacity: 0.6; font-size: 0.9rem;">Click the card to flip 🔄</p>
+        </div>
+
+        <!-- Try This Next Section -->
+        <div class="try-next reveal">
+            <h3>Try this next 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i class="fas fa-question-circle"></i></div>
+                    <h3>Important Questions</h3>
+                    <p>Generate key questions from your notes to prepare for exams.</p>
+                    <a href="important-questions.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-align-left"></i></div>
+                    <h3>Assignment Formatter</h3>
+                    <p>Auto-format your text with proper headings and spacing instantly.</p>
+                    <a href="assignment-formatter.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loader-container" id="loader-overlay">
+        <div class="loader"></div>
+        <p>Creating Flashcards...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const notesInput = document.getElementById('notes-input');
+        const generateBtn = document.getElementById('generate-btn');
+        const flashcardSection = document.getElementById('flashcard-section');
+        const cardContainer = document.getElementById('card');
+        const cardWrapper = document.getElementById('card-wrapper');
+        const frontText = document.getElementById('front-text');
+        const backText = document.getElementById('back-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const counter = document.getElementById('card-counter');
+        const loader = document.getElementById('loader-overlay');
+
+        let flashcards = [];
+        let currentIndex = 0;
+
+        generateBtn.onclick = () => {
+            const text = notesInput.value.trim();
+            if (!text) {
+                alert('Please paste some notes first!');
+                return;
+            }
+
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                flashcards = generateLogic(text);
+                if (flashcards.length === 0) {
+                    alert('Could not generate flashcards. Try adding more sentences.');
+                    loader.style.display = 'none';
+                    return;
+                }
+
+                currentIndex = 0;
+                updateCard();
+                flashcardSection.style.display = 'block';
+                loader.style.display = 'none';
+                flashcardSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
+        };
+
+        function generateLogic(text) {
+            // Split by sentences
+            const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+            const cards = [];
+
+            sentences.forEach(s => {
+                const trimmed = s.trim();
+                if (trimmed.length < 20) return;
+
+                // Simple heuristic: Front is a question, back is the sentence
+                // Or if sentence has "is", front is the subject, back is the definition
+                if (trimmed.includes(' is ')) {
+                    const parts = trimmed.split(' is ');
+                    cards.push({
+                        front: `What is ${parts[0]}?`,
+                        back: trimmed
+                    });
+                } else {
+                    cards.push({
+                        front: 'Key Concept:',
+                        back: trimmed
+                    });
+                }
+            });
+
+            return cards;
+        }
+
+        function updateCard() {
+            cardContainer.classList.remove('flipped');
+            frontText.textContent = flashcards[currentIndex].front;
+            backText.textContent = flashcards[currentIndex].back;
+            counter.textContent = `${currentIndex + 1} / ${flashcards.length}`;
+            
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === flashcards.length - 1;
+        }
+
+        cardWrapper.onclick = () => {
+            cardContainer.classList.toggle('flipped');
+        };
+
+        prevBtn.onclick = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        };
+
+        nextBtn.onclick = () => {
+            if (currentIndex < flashcards.length - 1) {
+                currentIndex++;
+                updateCard();
+            }
+        };
+    </script>
+</body>
+
+</html>

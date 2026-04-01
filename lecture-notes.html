@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture Notes Generator - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Generate structured lecture notes from topics with Student Toolkit by webwithaditya.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="tool-container reveal">
+        <div class="tool-header">
+            <h1>🎤 Lecture Notes Generator</h1>
+            <p>Enter a topic or keywords to generate structured lecture notes instantly.</p>
+        </div>
+
+        <input type="text" id="topic-input" placeholder="Enter topic (e.g., Photosynthesis, Neural Networks, Civil War)">
+        
+        <button id="generate-btn" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Generate Structured Notes ✍️</button>
+
+        <div id="results-section" style="display: none; margin-top: 60px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Lecture Notes Checklist</h3>
+                <button id="copy-btn" class="btn btn-sm" style="border: 1px solid var(--border-color);"><i class="fas fa-copy"></i> Copy Notes</button>
+            </div>
+            
+            <div id="notes-output" style="padding: 32px; background: rgba(0,0,0,0.02); border-radius: 12px; border: 1px solid var(--border-color); color: var(--text-current);">
+                <!-- Structured notes will appear here -->
+            </div>
+        </div>
+
+        <!-- Try This Next Section -->
+        <div class="try-next reveal">
+            <h3>Try this next 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-align-left"></i></div>
+                    <h3>Assignment Formatter</h3>
+                    <p>Auto-format your text with proper headings and spacing instantly.</p>
+                    <a href="assignment-formatter.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;"><i class="fas fa-compress-alt"></i></div>
+                    <h3>Summarise Notes</h3>
+                    <p>Paste your long notes and get a concise summary in seconds using smart logic.</p>
+                    <a href="summarise-notes.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loader-container" id="loader-overlay">
+        <div class="loader"></div>
+        <p>Generating Structured Notes...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const topicInput = document.getElementById('topic-input');
+        const generateBtn = document.getElementById('generate-btn');
+        const notesOutput = document.getElementById('notes-output');
+        const resultsSection = document.getElementById('results-section');
+        const copyBtn = document.getElementById('copy-btn');
+        const loader = document.getElementById('loader-overlay');
+
+        generateBtn.onclick = () => {
+            const topic = topicInput.value.trim();
+            if (!topic) {
+                alert('Please enter a topic first!');
+                return;
+            }
+
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                const notes = generateStructuredNotes(topic);
+                notesOutput.innerHTML = notes;
+                resultsSection.style.display = 'block';
+                loader.style.display = 'none';
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1200);
+        };
+
+        function generateStructuredNotes(topic) {
+            let html = `<h2 style="margin-bottom: 20px;">Topic: ${topic}</h2>`;
+            
+            // Section 1: Overview
+            html += `<h3 style="color: var(--primary); margin-bottom: 10px;">1. Introduction & Overview</h3>
+                     <ul style="margin-bottom: 20px; padding-left: 20px;">
+                        <li>Definition and core concept of ${topic}.</li>
+                        <li>Historical background and evolution.</li>
+                        <li>Why this topic is important in academic studies.</li>
+                     </ul>`;
+
+            // Section 2: Key Principles
+            html += `<h3 style="color: var(--primary); margin-bottom: 10px;">2. Key Principles & Mechanisms</h3>
+                     <ul style="margin-bottom: 20px; padding-left: 20px;">
+                        <li>Fundamental governing laws or rules of ${topic}.</li>
+                        <li>Step-by-step breakdown of how it works.</li>
+                        <li>Major theories and contributors associated with ${topic}.</li>
+                     </ul>`;
+
+            // Section 3: Applications
+            html += `<h3 style="color: var(--primary); margin-bottom: 10px;">3. Practical Applications</h3>
+                     <ul style="margin-bottom: 20px; padding-left: 20px;">
+                        <li>Real-world examples and use cases.</li>
+                        <li>Integration with other disciplines.</li>
+                        <li>Current trends and future prospects.</li>
+                     </ul>`;
+
+            // Section 4: Summary
+            html += `<h3 style="color: var(--primary); margin-bottom: 10px;">4. Conclusion & Key Takeaways</h3>
+                     <p>Understanding ${topic} requires a grasp of its conceptual foundations and practical implications. Pro-tip: Focus on the relationship between its core components for exam success.</p>`;
+
+            return html;
+        }
+
+        copyBtn.onclick = () => {
+            const text = notesOutput.innerText;
+            navigator.clipboard.writeText(text);
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied';
+            setTimeout(() => {
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Notes';
+            }, 2000);
+        };
+    </script>
+</body>
+
+</html>

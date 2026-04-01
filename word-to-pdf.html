@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word to PDF - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Convert Word documents to PDF instantly with Student Toolkit by webwithaditya.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="tool-container reveal">
+        <div class="tool-header">
+            <h1>📄 Word to PDF</h1>
+            <p>Convert your Word (.docx) documents into high-quality PDF files instantly.</p>
+        </div>
+
+        <div class="upload-area" id="drop-zone">
+            <i class="fas fa-file-word" style="color: #2b579a;"></i>
+            <h3>Click or Drag & Drop Word file here</h3>
+            <p>Maximum file size: 20MB</p>
+            <input type="file" id="file-input" accept=".doc,.docx,.rtf" style="display: none;">
+        </div>
+
+        <div id="file-info" style="display: none; margin-bottom: 20px; padding: 15px; background: rgba(99, 102, 241, 0.05); border-radius: 10px; display: flex; align-items: center; gap: 15px;">
+            <i class="fas fa-file-word" style="font-size: 1.5rem; color: #2b579a;"></i>
+            <span id="file-name" style="font-weight: 500;">document.docx</span>
+            <button id="remove-file" style="margin-left: auto; background: none; border: none; color: #ef4444; cursor: pointer;"><i class="fas fa-times"></i></button>
+        </div>
+
+        <button id="convert-btn" class="btn btn-primary" style="width: 100%;" disabled>Convert to PDF 🚀</button>
+
+        <div class="progress-container" id="progress-container">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span id="progress-status">Converting...</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <div id="success-area" style="display: none; margin-top: 40px; text-align: center; padding: 30px; background: rgba(16, 185, 129, 0.1); border-radius: 1rem; border: 1px solid #10b981;">
+            <i class="fas fa-check-circle" style="font-size: 3rem; color: #10b981; margin-bottom: 15px;"></i>
+            <h3>Conversion Successful!</h3>
+            <p style="margin-bottom: 20px;">Your Word document has been converted to PDF.</p>
+            <button id="download-btn" class="btn btn-primary">Download PDF Document <i class="fas fa-download"></i></button>
+        </div>
+
+        <!-- Try This Next Section -->
+        <div class="try-next reveal">
+            <h3>Try this next 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);"><i class="fas fa-file-pdf"></i></div>
+                    <h3>PDF to Word</h3>
+                    <p>Convert your PDF documents to editable Microsoft Word files with ease.</p>
+                    <a href="pdf-to-word.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;"><i class="fas fa-compress-alt"></i></div>
+                    <h3>Summarise Notes</h3>
+                    <p>Paste your long notes and get a concise summary in seconds using smart logic.</p>
+                    <a href="summarise-notes.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileInfo = document.getElementById('file-info');
+        const fileName = document.getElementById('file-name');
+        const removeFile = document.getElementById('remove-file');
+        const convertBtn = document.getElementById('convert-btn');
+        const progressContainer = document.getElementById('progress-container');
+        const progressFill = document.getElementById('progress-fill');
+        const progressPercent = document.getElementById('progress-percent');
+        const progressStatus = document.getElementById('progress-status');
+        const successArea = document.getElementById('success-area');
+        const downloadBtn = document.getElementById('download-btn');
+
+        let currentFile = null;
+
+        dropZone.onclick = () => fileInput.click();
+        fileInput.onchange = (e) => handleFile(e.target.files[0]);
+
+        dropZone.ondragover = (e) => { e.preventDefault(); dropZone.style.borderColor = 'var(--primary)'; };
+        dropZone.ondragleave = () => { dropZone.style.borderColor = 'var(--border-color)'; };
+        dropZone.ondrop = (e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); };
+
+        function handleFile(file) {
+            if (file && (file.name.endsWith('.docx') || file.name.endsWith('.doc'))) {
+                currentFile = file;
+                fileName.textContent = file.name;
+                fileInfo.style.display = 'flex';
+                dropZone.style.display = 'none';
+                convertBtn.disabled = false;
+            } else {
+                alert('Please upload a valid Word document (.doc, .docx)');
+            }
+        }
+
+        removeFile.onclick = () => {
+            currentFile = null;
+            fileInfo.style.display = 'none';
+            dropZone.style.display = 'block';
+            convertBtn.disabled = true;
+            successArea.style.display = 'none';
+            progressContainer.style.display = 'none';
+            fileInput.value = '';
+        };
+
+        convertBtn.onclick = () => {
+            if (!currentFile) return;
+
+            convertBtn.disabled = true;
+            progressContainer.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    progressStatus.textContent = 'Completed!';
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                        successArea.style.display = 'block';
+                    }, 500);
+                }
+                progressPercent.textContent = Math.round(progress) + '%';
+                progressFill.style.width = progress + '%';
+            }, 300);
+        };
+
+        downloadBtn.onclick = () => {
+            const pdfName = currentFile.name.replace(/\.(docx|doc)$/, '') + '.pdf';
+            const blob = new Blob(['Simulated PDF content'], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = pdfName;
+            a.click();
+            URL.revokeObjectURL(url);
+        };
+    </script>
+</body>
+
+</html>

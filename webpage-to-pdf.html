@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage to PDF - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Convert your notes or simple webpages to PDF instantly with Student Toolkit by webwithaditya.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="tool-container reveal">
+        <div class="tool-header">
+            <h1>🌐 Webpage to PDF</h1>
+            <p>Paste your HTML or text content to generate a professional PDF document.</p>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Content Title:</label>
+            <input type="text" id="doc-title" placeholder="Enter document title (e.g., Physics Assignment)">
+        </div>
+
+        <div style="margin-bottom: 24px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Paste Content (Text or HTML):</label>
+            <textarea id="doc-content" placeholder="Paste your article, notes, or HTML here..." style="min-height: 250px;"></textarea>
+        </div>
+
+        <button id="convert-btn" class="btn btn-primary" style="width: 100%;">Create PDF Document 📄</button>
+
+        <div id="results-section" style="display: none; margin-top: 60px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Document Preview</h3>
+                <button id="print-btn" class="btn btn-sm" style="border: 1px solid var(--border-color);"><i class="fas fa-download"></i> Save as PDF</button>
+            </div>
+            
+            <div id="pdf-preview" style="padding: 50px; background: white; color: black; border-radius: 8px; border: 1px solid var(--border-color); font-family: 'Times New Roman', serif; line-height: 1.6; min-height: 400px; overflow-y: auto;">
+                <!-- Preview content here -->
+            </div>
+        </div>
+
+        <!-- Try This Next Section -->
+        <div class="try-next reveal">
+            <h3>Try this next 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;"><i class="fas fa-file-word"></i></div>
+                    <h3>Word to PDF</h3>
+                    <p>Convert your Word documents (.docx) to high-quality PDF files instantly.</p>
+                    <a href="word-to-pdf.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-object-group"></i></div>
+                    <h3>Merge PDF</h3>
+                    <p>Combine multiple PDF files into one single document in seconds.</p>
+                    <a href="merge-pdf.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loader-container" id="loader-overlay">
+        <div class="loader"></div>
+        <p>Generating PDF Preview...</p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const docTitle = document.getElementById('doc-title');
+        const docContent = document.getElementById('doc-content');
+        const convertBtn = document.getElementById('convert-btn');
+        const pdfPreview = document.getElementById('pdf-preview');
+        const resultsSection = document.getElementById('results-section');
+        const printBtn = document.getElementById('print-btn');
+        const loader = document.getElementById('loader-overlay');
+
+        convertBtn.onclick = () => {
+            const title = docTitle.value.trim() || 'Untitled Document';
+            const content = docContent.value.trim();
+
+            if (!content) {
+                alert('Please enter some content first!');
+                return;
+            }
+
+            loader.style.display = 'flex';
+
+            setTimeout(() => {
+                let html = `<h1 style="text-align: center; margin-bottom: 30px; text-decoration: underline;">${title}</h1>`;
+                html += `<div>${content.replace(/\n/g, '<br>')}</div>`;
+                
+                pdfPreview.innerHTML = html;
+                resultsSection.style.display = 'block';
+                loader.style.display = 'none';
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 1200);
+        };
+
+        printBtn.onclick = () => {
+            window.print();
+        };
+    </script>
+</body>
+
+</html>

@@ -45,7 +45,7 @@
             <input type="file" id="file-input" accept=".doc,.docx,.rtf" style="display: none;">
         </div>
 
-        <div id="file-info" style="display: none; margin-bottom: 20px; padding: 15px; background: rgba(99, 102, 241, 0.05); border-radius: 10px; display: flex; align-items: center; gap: 15px;">
+        <div id="file-info" style="display: none; margin-bottom: 20px; padding: 15px; background: rgba(99, 102, 241, 0.05); border-radius: 10px; align-items: center; gap: 15px;">
             <i class="fas fa-file-word" style="font-size: 1.5rem; color: #2b579a;"></i>
             <span id="file-name" style="font-weight: 500;">document.docx</span>
             <button id="remove-file" style="margin-left: auto; background: none; border: none; color: #ef4444; cursor: pointer;"><i class="fas fa-times"></i></button>
@@ -95,6 +95,8 @@
         <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="script.js"></script>
     <script>
         const dropZone = document.getElementById('drop-zone');
@@ -120,14 +122,16 @@
         dropZone.ondrop = (e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); };
 
         function handleFile(file) {
-            if (file && (file.name.endsWith('.docx') || file.name.endsWith('.doc'))) {
+            if (file && file.name.endsWith('.docx')) {
                 currentFile = file;
                 fileName.textContent = file.name;
                 fileInfo.style.display = 'flex';
                 dropZone.style.display = 'none';
                 convertBtn.disabled = false;
+            } else if (file && file.name.endsWith('.doc')) {
+                alert('The older .doc format is not supported. Please use .docx files.');
             } else {
-                alert('Please upload a valid Word document (.doc, .docx)');
+                alert('Please upload a valid Word document (.docx)');
             }
         }
 
@@ -141,40 +145,81 @@
             fileInput.value = '';
         };
 
-        convertBtn.onclick = () => {
+        convertBtn.onclick = async () => {
             if (!currentFile) return;
 
             convertBtn.disabled = true;
             progressContainer.style.display = 'block';
-            
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += Math.random() * 15;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    progressStatus.textContent = 'Completed!';
-                    setTimeout(() => {
-                        progressContainer.style.display = 'none';
-                        successArea.style.display = 'block';
-                    }, 500);
-                }
-                progressPercent.textContent = Math.round(progress) + '%';
-                progressFill.style.width = progress + '%';
-            }, 300);
-        };
+            progressStatus.textContent = 'Reading file...';
+            progressPercent.textContent = '0%';
+            progressFill.style.width = '0%';
 
-        downloadBtn.onclick = () => {
-            const pdfName = currentFile.name.replace(/\.(docx|doc)$/, '') + '.pdf';
-            const blob = new Blob(['Simulated PDF content'], { type: 'application/pdf' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = pdfName;
-            a.click();
-            URL.revokeObjectURL(url);
+            try {
+                // 1. Read file as array buffer
+                const arrayBuffer = await currentFile.arrayBuffer();
+                progressFill.style.width = '20%';
+                progressPercent.textContent = '20%';
+                progressStatus.textContent = 'Parsing Word document...';
+
+                // 2. Convert to HTML using Mammoth
+                const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                const html = result.value; // The generated HTML
+                progressFill.style.width = '50%';
+                progressPercent.textContent = '50%';
+                progressStatus.textContent = 'Generating PDF...';
+
+                // 3. Convert HTML to PDF using html2pdf
+                const element = document.createElement('div');
+                element.innerHTML = html;
+                element.style.padding = '40px';
+                element.style.color = '#000';
+                element.style.background = '#fff';
+
+                const opt = {
+                    margin: 1,
+                    filename: currentFile.name.replace('.docx', '') + '.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                // Generate and get as blob for the download button
+                const pdfBlob = await html2pdf().from(element).set(opt).output('blob');
+                const url = URL.createObjectURL(pdfBlob);
+
+                downloadBtn.onclick = () => {
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = opt.filename;
+                    a.click();
+                };
+
+                progressFill.style.width = '100%';
+                progressPercent.textContent = '100%';
+                progressStatus.textContent = 'Conversion Complete!';
+
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    successArea.style.display = 'block';
+                }, 500);
+
+            } catch (error) {
+                console.error('Conversion error:', error);
+                alert('An error occurred during conversion. Please make sure the file is not corrupted.');
+                convertBtn.disabled = false;
+                progressContainer.style.display = 'none';
+            }
         };
     </script>
+    <style>
+        #convert-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.6;
+        }
+    </style>
 </body>
 
 </html>

@@ -44,8 +44,8 @@
             <h1>Save Hours of Work with <br><span>Free Student Tools ⏳</span></h1>
             <p>All-in-one toolkit for students — PDF tools, notes summariser, resume builder, and more. Free, fast, and no login required.</p>
             <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <a href="#tools" class="btn btn-primary">Start Using Tools 🚀</a>
-                <a href="#about" class="btn" style="border: 1px solid var(--border-color);">Learn More</a>
+                <a href="study-dashboard.html" class="btn btn-primary" style="background: var(--primary-gradient);"><i class="fas fa-chart-line"></i> Open Study Dashboard</a>
+                <a href="#tools" class="btn btn-primary" style="background: rgba(99, 102, 241, 0.1); color: var(--primary); box-shadow: none;">All Tools 🚀</a>
             </div>
         </div>
     </header>
@@ -54,6 +54,15 @@
     <section id="tools" class="container reveal">
         <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px;">Most Popular Tools</h2>
         <div class="tools-grid">
+            <!-- Top Tool 0: Study Dashboard -->
+            <div class="tool-card" style="border: 2px solid var(--primary); background: rgba(99, 102, 241, 0.05);">
+                <div class="tool-icon" style="background: var(--primary-gradient); color: white;"><i class="fas fa-chart-pie"></i></div>
+                <div style="background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; display: inline-block; margin-bottom: 5px;">NEW FEATURE</div>
+                <h3>Study Dashboard</h3>
+                <p>Track study time, maintain streaks, and manage daily tasks in one view.</p>
+                <a href="study-dashboard.html" class="btn btn-primary btn-sm">Launch Dashboard 📊</a>
+            </div>
+
             <!-- Top Tool 1: Merge PDF -->
             <div class="tool-card">
                 <div class="tool-icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-object-group"></i></div>
@@ -119,6 +128,14 @@
                 <h3>Webpage to PDF</h3>
                 <p>Convert your notes or simple webpages to PDF instantly.</p>
                 <a href="webpage-to-pdf.html" class="btn btn-primary btn-sm">Use Tool</a>
+            </div>
+
+            <!-- New Tool: Image to PDF -->
+            <div class="tool-card">
+                <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);"><i class="fas fa-images"></i></div>
+                <h3>Image to PDF</h3>
+                <p>Convert your PNG and JPEG images into high-quality PDF documents instantly.</p>
+                <a href="image-to-pdf.html" class="btn btn-primary btn-sm">Use Tool</a>
             </div>
 
             <!-- New Tool 6: Word to PDF -->

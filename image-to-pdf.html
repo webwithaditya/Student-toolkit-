@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Free student tools by webwithaditya. Convert your PNG and JPEG images into high-quality PDF documents instantly.">
+    <meta name="keywords" content="image to pdf online free, jpg to pdf, png to pdf, convert image to pdf, student toolkit, free pdf tool for students">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tool-container reveal" style="background: var(--card-current); border: var(--glass-border); backdrop-filter: blur(20px); padding: 3rem; border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;">
+            <div class="tool-header">
+                <div style="background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 100px; display: inline-block; font-weight: 600; margin-bottom: 15px; font-size: 0.8rem;">🖼️ Image Converter</div>
+                <h1 style="font-size: 2.5rem; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 10px;">Image to PDF Online Free</h1>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 1.1rem;">Convert your PNG and JPEG images into high-quality PDF documents instantly.</p>
+            </div>
+
+            <div class="upload-area" id="drop-zone" onclick="document.getElementById('file-input').click()" style="border: 2px dashed rgba(99, 102, 241, 0.3); background: rgba(99, 102, 241, 0.02); border-radius: 2rem; padding: 4rem 2rem; transition: var(--transition); text-align: center; cursor: pointer; margin-bottom: 30px;">
+                <i class="fas fa-images" style="font-size: 3.5rem; color: var(--primary); margin-bottom: 20px;"></i>
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-current);">Click to <span style="color: var(--primary);">Select Images</span> or Drag & Drop</p>
+                <p style="color: var(--text-current); opacity: 0.7; font-size: 0.9rem; margin-top: 5px;">Supports PNG, JPG, JPEG (Select multiple files)</p>
+                <input type="file" id="file-input" multiple accept="image/png, image/jpeg, image/jpg" style="display: none;">
+            </div>
+
+            <div id="file-list" style="margin-bottom: 30px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;"></div>
+
+            <div id="action-area" style="display: none; text-align: center;">
+                <button id="convert-btn" class="btn btn-primary" style="padding: 1.2rem 3rem; border-radius: 100px; font-weight: 800; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);">
+                    <i class="fas fa-file-pdf"></i> Convert to PDF 🚀
+                </button>
+            </div>
+
+            <div id="loader" style="display: none; text-align: center; margin-bottom: 40px; margin-top: 20px;">
+                <div class="spinner"></div>
+                <p style="color: var(--text-current); opacity: 0.7; font-weight: 600; margin-top: 15px;" id="loader-text">Generating your PDF...</p>
+                <div style="width: 100%; height: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; margin-top: 10px; overflow: hidden;">
+                    <div id="progress-fill" style="width: 0%; height: 100%; background: var(--primary); transition: width 0.3s;"></div>
+                </div>
+            </div>
+
+            <div id="download-area" style="display: none; text-align: center; margin-top: 30px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;">
+                <h3 style="margin-bottom: 20px; font-weight: 800;">Conversion Complete! 🎉</h3>
+                <button id="download-btn" class="btn btn-primary" style="padding: 1.2rem 3rem; border-radius: 100px; font-weight: 800;">
+                    <i class="fas fa-download"></i> Download Your PDF
+                </button>
+                <p style="margin-top: 15px;"><a href="image-to-pdf.html" style="color: var(--text-current); opacity: 0.7; text-decoration: underline;">Convert more images</a></p>
+            </div>
+
+            <div class="seo-content" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px; color: var(--text-current); opacity: 0.8; line-height: 1.8; margin-top: 40px;">
+                <h2>How to Use This Tool</h2>
+                <p>To use our Image to PDF tool, upload your images by clicking the upload area or dragging them directly into the browser. You can select multiple images at once. Once you've selected your files, you can see a preview of each image. Click "Convert to PDF" and our system will instantly combine them into a single, high-quality PDF document. Download your file and you're done!</p>
+                
+                <h2>Benefits for Students</h2>
+                <p>Students often need to combine photos of handwritten assignments or textbook pages into a single document for submission. This tool makes it incredibly easy to turn phone photos into professional-looking PDF files without needing a scanner. It's a lifesaver for online assignment submissions and digital project archiving.</p>
+
+                <h2>Why Use This Tool</h2>
+                <p>This free image to PDF tool helps students convert images quickly and easily. It works entirely in your browser, meaning your photos never leave your device, ensuring maximum privacy. It's fast, free, and supports multiple images per PDF. No watermarks, no login required, just pure productivity.</p>
+            </div>
+
+            <div class="internal-links" style="margin-top: 40px; padding: 20px; background: rgba(99, 102, 241, 0.05); border-radius: 1rem;">
+                <p style="font-weight: 700; margin-bottom: 15px;">Try this next:</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="merge-pdf.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Merge PDF Tool</a>
+                    <a href="word-to-pdf.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Word to PDF</a>
+                    <a href="pdf-to-word.html" class="tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">PDF to Word</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="branding">Student Toolkit by <span>webwithaditya</span></div>
+        <div class="footer-socials">
+            <a href="https://instagram.com/webwithaditya" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/@webwithaditya" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://t.me/webwithaditya" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const { jsPDF } = window.jspdf;
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const fileList = document.getElementById('file-list');
+        const actionArea = document.getElementById('action-area');
+        const convertBtn = document.getElementById('convert-btn');
+        const loader = document.getElementById('loader');
+        const progressFill = document.getElementById('progress-fill');
+        const downloadArea = document.getElementById('download-area');
+        const downloadBtn = document.getElementById('download-btn');
+
+        let selectedFiles = [];
+
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'var(--primary)';
+            dropZone.style.background = 'rgba(99, 102, 241, 0.05)';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = 'rgba(99, 102, 241, 0.3)';
+            dropZone.style.background = 'rgba(99, 102, 241, 0.02)';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            handleFiles(e.dataTransfer.files);
+        });
+
+        function handleFiles(files) {
+            const newFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+            if (newFiles.length < files.length) {
+                alert('Only image files (PNG, JPG, JPEG) are allowed!');
+            }
+            
+            newFiles.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    selectedFiles.push({
+                        file: file,
+                        dataUrl: e.target.result
+                    });
+                    renderFileList();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderFileList() {
+            fileList.innerHTML = '';
+            selectedFiles.forEach((fileObj, index) => {
+                const item = document.createElement('div');
+                item.className = 'file-preview-card';
+                item.innerHTML = `
+                    <img src="${fileObj.dataUrl}" alt="preview">
+                    <div class="file-name">${fileObj.file.name}</div>
+                    <button class="remove-btn" onclick="removeFile(${index})"><i class="fas fa-times"></i></button>
+                `;
+                fileList.appendChild(item);
+            });
+
+            actionArea.style.display = selectedFiles.length >= 1 ? 'block' : 'none';
+        }
+
+        window.removeFile = function(index) {
+            selectedFiles.splice(index, 1);
+            renderFileList();
+        };
+
+        convertBtn.addEventListener('click', async () => {
+            if (selectedFiles.length === 0) return;
+
+            actionArea.style.display = 'none';
+            fileList.style.display = 'none';
+            dropZone.style.display = 'none';
+            loader.style.display = 'block';
+            
+            try {
+                const doc = new jsPDF({
+                    orientation: 'p',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+
+                for (let i = 0; i < selectedFiles.length; i++) {
+                    const img = new Image();
+                    img.src = selectedFiles[i].dataUrl;
+                    
+                    await new Promise((resolve) => {
+                        img.onload = () => {
+                            if (i > 0) doc.addPage();
+                            
+                            const imgWidth = img.width;
+                            const imgHeight = img.height;
+                            const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+                            
+                            const newWidth = imgWidth * ratio;
+                            const newHeight = imgHeight * ratio;
+                            const x = (pageWidth - newWidth) / 2;
+                            const y = (pageHeight - newHeight) / 2;
+                            
+                            doc.addImage(selectedFiles[i].dataUrl, 'JPEG', x, y, newWidth, newHeight);
+                            
+                            const progress = Math.round(((i + 1) / selectedFiles.length) * 100);
+                            progressFill.style.width = progress + '%';
+                            resolve();
+                        };
+                    });
+                }
+
+                const pdfBlob = doc.output('blob');
+                const url = URL.createObjectURL(pdfBlob);
+                
+                downloadArea.style.display = 'block';
+                downloadBtn.onclick = () => {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'images_converted.pdf';
+                    link.click();
+                };
+                loader.style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error converting images:', error);
+                alert('An error occurred while converting the images. Please try again.');
+                loader.style.display = 'none';
+                actionArea.style.display = 'block';
+                fileList.style.display = 'grid';
+                dropZone.style.display = 'block';
+            }
+        });
+    </script>
+    <style>
+        .spinner { width: 40px; height: 40px; border: 4px solid rgba(99, 102, 241, 0.1); border-top: 4px solid var(--primary); border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .tag { background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 5px 15px; border-radius: 100px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: var(--transition); }
+        .tag:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+        .seo-content h2 { margin-top: 30px; margin-bottom: 15px; font-size: 1.5rem; color: var(--text-current); }
+        
+        .file-preview-card {
+            background: var(--card-current);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 10px;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .file-preview-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .file-name {
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-current);
+            opacity: 0.8;
+        }
+        
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .remove-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .progress-bar { width: 100%; height: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.3s; }
+    </style>
+</body>
+</html>

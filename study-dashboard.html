@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Dashboard - Student Toolkit by webwithaditya</title>
+    <meta name="description" content="Track your study time, maintain streaks, and manage tasks with the Student Toolkit Study Dashboard by webwithaditya.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dashboard-bg: #f8fafc;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-current);
+            padding: 24px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timer-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--primary);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .streak-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #f59e0b;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .motivation-banner {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
+        .task-list {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item.completed span {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .weekly-bar-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 150px;
+            margin-top: 20px;
+            padding: 0 10px;
+        }
+
+        .weekly-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            gap: 8px;
+        }
+
+        .weekly-bar {
+            width: 30px;
+            background: var(--primary);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.6s ease;
+            min-height: 2px;
+        }
+
+        .weekly-day {
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .quick-start-btn {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border: 1px dashed var(--primary);
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-start-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-style: solid;
+        }
+
+        .delete-btn {
+            margin-left: auto;
+            color: #ef4444;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .delete-btn:hover {
+            opacity: 1;
+        }
+
+        /* Custom Task Input Styling */
+        .task-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .task-input-group input {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <nav>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-graduation-cap"></i> webwith<span>aditya</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#tools">Tools</a>
+            <a href="index.html#feedback">Feedback</a>
+        </div>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 120px; padding-bottom: 60px;">
+        <div class="tool-header reveal">
+            <h1>Your Study Dashboard 📊</h1>
+            <p>Track your sessions, maintain streaks, and stay focused with webwithaditya.</p>
+        </div>
+
+        <div id="motivation-box" class="motivation-banner reveal">
+            <!-- Motivation message will appear here -->
+        </div>
+
+        <div class="dashboard-grid reveal">
+            <!-- SECTION 1: STUDY TIMER -->
+            <div class="stat-card">
+                <h3 style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-stopwatch" style="color: var(--primary);"></i> Study Timer</h3>
+                <div class="timer-display" id="timer-display">00:00:00</div>
+                <div class="timer-controls">
+                    <button id="start-btn" class="btn btn-primary"><i class="fas fa-play"></i> Start</button>
+                    <button id="pause-btn" class="btn" style="border: 1px solid var(--border-color); display: none;"><i class="fas fa-pause"></i> Pause</button>
+                    <button id="reset-btn" class="btn" style="border: 1px solid var(--border-color);"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+                <button id="quick-start-btn" class="quick-start-btn">
+                    Start 25 Min Focus Session ⏱️
+                </button>
+            </div>
+
+            <!-- SECTION 2 & 3: PROGRESS & STREAK -->
+            <div class="stat-card">
+                <div style="display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
+                    <div>
+                        <h3 style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-fire" style="color: #f59e0b;"></i> Study Streak</h3>
+                        <div class="streak-value" id="streak-display">0</div>
+                        <p style="text-align: center; opacity: 0.7;">Current Streak (Days)</p>
+                    </div>
+                    <div style="border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+                        <h3 style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-calendar-day" style="color: #10b981;"></i> Today's Progress</h3>
+                        <div style="font-size: 2rem; font-weight: 800; text-align: center; margin-top: 10px;" id="today-time-display">0h 0m</div>
+                        <p style="text-align: center; opacity: 0.7;">Total Study Time Today</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: TASK LIST -->
+            <div class="stat-card">
+                <h3 style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-tasks" style="color: #ec4899;"></i> Daily Tasks</h3>
+                <div class="task-input-group" style="margin-top: 20px;">
+                    <input type="text" id="task-input" placeholder="Add study task...">
+                    <button id="add-task-btn" class="btn btn-primary btn-sm">Add</button>
+                </div>
+                <div class="task-list" id="task-list">
+                    <!-- Tasks will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: WEEKLY PROGRESS -->
+        <div class="stat-card reveal" style="margin-top: 24px;">
+            <h3 style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-chart-bar" style="color: var(--primary);"></i> Weekly Progress</h3>
+            <div class="weekly-bar-container" id="weekly-chart">
+                <!-- Bar chart will be generated here -->
+            </div>
+        </div>
+
+        <!-- REUSE TOOLS SECTION -->
+        <div class="try-next reveal" style="margin-top: 60px;">
+            <h3>Use Tools 👇</h3>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(217, 70, 239, 0.1); color: #d946ef;"><i class="fas fa-compress-alt"></i></div>
+                    <h3>Notes Summariser</h3>
+                    <p>Paste your long notes and get a concise summary in seconds using smart logic.</p>
+                    <a href="summarise-notes.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;"><i class="fas fa-layer-group"></i></div>
+                    <h3>Flashcards</h3>
+                    <p>Turn your notes into interactive flashcards for better revision.</p>
+                    <a href="flashcards.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);"><i class="fas fa-user-tie"></i></div>
+                    <h3>Interview Tool</h3>
+                    <p>Prepare for exams and interviews with AI-generated important questions.</p>
+                    <a href="important-questions.html" class="btn btn-primary btn-sm">Use Tool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="margin-top: 60px;">
+        <div class="branding">Stay consistent with <span>webwithaditya</span> 🚀</div>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.6;">&copy; 2026 Student Toolkit. Built with ❤️ for students.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // --- DATA & STATE ---
+        let studyData = JSON.parse(localStorage.getItem('study_dashboard_data')) || {
+            todaySeconds: 0,
+            history: {}, // { "YYYY-MM-DD": seconds }
+            streak: 0,
+            lastDate: null,
+            tasks: []
+        };
+
+        let timerState = JSON.parse(localStorage.getItem('study_timer_state')) || {
+            running: false,
+            startTime: null,
+            elapsedBeforeStart: 0
+        };
+
+        const motivations = [
+            "Keep going 💪",
+            "You are doing great 🔥",
+            "Consistency wins 📈",
+            "Small steps daily = big success 🚀",
+            "You've got this! ✨",
+            "Study now, celebrate later 🎓"
+        ];
+
+        let timerInterval;
+
+        // --- DOM ELEMENTS ---
+        const timerDisplay = document.getElementById('timer-display');
+        const startBtn = document.getElementById('start-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const quickStartBtn = document.getElementById('quick-start-btn');
+        const streakDisplay = document.getElementById('streak-display');
+        const todayTimeDisplay = document.getElementById('today-time-display');
+        const taskInput = document.getElementById('task-input');
+        const addTaskBtn = document.getElementById('add-task-btn');
+        const taskList = document.getElementById('task-list');
+        const weeklyChart = document.getElementById('weekly-chart');
+        const motivationBox = document.getElementById('motivation-box');
+
+        // --- INITIALIZATION ---
+        function init() {
+            checkDailyReset();
+            renderTasks();
+            renderWeeklyChart();
+            setMotivation();
+            
+            // Check if timer was running and resume
+            if (timerState.running) {
+                const now = Date.now();
+                const totalElapsed = timerState.elapsedBeforeStart + Math.floor((now - timerState.startTime) / 1000);
+                timerState.elapsedBeforeStart = totalElapsed;
+                timerState.startTime = now;
+                startTimer();
+            } else {
+                updateTimerDisplay(timerState.elapsedBeforeStart);
+            }
+            
+            updateProgressStats();
+        }
+
+        function checkDailyReset() {
+            const today = new Date().toISOString().split('T')[0];
+            const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+
+            if (studyData.lastDate !== today) {
+                // If they studied yesterday, increment streak
+                if (studyData.lastDate === yesterday && studyData.todaySeconds > 0) {
+                    studyData.streak += 1;
+                } else if (studyData.lastDate !== yesterday && studyData.lastDate !== null) {
+                    // Missed more than a day
+                    studyData.streak = 0;
+                }
+                
+                // Save yesterday's data to history if it exists
+                if (studyData.lastDate) {
+                    studyData.history[studyData.lastDate] = studyData.todaySeconds;
+                }
+                
+                studyData.todaySeconds = 0;
+                studyData.lastDate = today;
+                saveData();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('study_dashboard_data', JSON.stringify(studyData));
+        }
+
+        function saveTimerState() {
+            localStorage.setItem('study_timer_state', JSON.stringify(timerState));
+        }
+
+        // --- TIMER LOGIC ---
+        function startTimer() {
+            if (!timerInterval) {
+                timerState.running = true;
+                timerState.startTime = Date.now();
+                saveTimerState();
+                
+                timerInterval = setInterval(() => {
+                    const totalSeconds = timerState.elapsedBeforeStart + Math.floor((Date.now() - timerState.startTime) / 1000);
+                    updateTimerDisplay(totalSeconds);
+                    
+                    // Update today's total (real-time update)
+                    // Note: This only updates the local variable, we save to disk on pause/tick intervals
+                    updateProgressStats(totalSeconds);
+                }, 1000);
+
+                startBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline-flex';
+            }
+        }
+
+        function pauseTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                
+                const sessionSeconds = Math.floor((Date.now() - timerState.startTime) / 1000);
+                timerState.elapsedBeforeStart += sessionSeconds;
+                timerState.running = false;
+                timerState.startTime = null;
+                
+                studyData.todaySeconds += sessionSeconds;
+                studyData.history[studyData.lastDate] = studyData.todaySeconds;
+                
+                saveTimerState();
+                saveData();
+                updateProgressStats();
+                renderWeeklyChart();
+
+                startBtn.style.display = 'inline-flex';
+                pauseBtn.style.display = 'none';
+            }
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timerState.elapsedBeforeStart = 0;
+            saveTimerState();
+            updateTimerDisplay(0);
+        }
+
+        function formatTime(totalSeconds) {
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+            return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        function updateTimerDisplay(seconds) {
+            timerDisplay.textContent = formatTime(seconds);
+        }
+
+        function updateProgressStats(currentSessionSeconds = 0) {
+            const totalSeconds = studyData.todaySeconds + currentSessionSeconds;
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            todayTimeDisplay.textContent = `${h}h ${m}m`;
+            streakDisplay.textContent = (studyData.todaySeconds > 0 || currentSessionSeconds > 0) && studyData.streak === 0 ? "1" : (studyData.todaySeconds > 0 || currentSessionSeconds > 0 ? studyData.streak + 1 : studyData.streak);
+        }
+
+        // --- TASKS LOGIC ---
+        addTaskBtn.onclick = () => {
+            const text = taskInput.value.trim();
+            if (text) {
+                studyData.tasks.push({ id: Date.now(), text, completed: false });
+                taskInput.value = '';
+                saveData();
+                renderTasks();
+            }
+        };
+
+        function renderTasks() {
+            taskList.innerHTML = '';
+            studyData.tasks.forEach(task => {
+                const item = document.createElement('div');
+                item.className = `task-item ${task.completed ? 'completed' : ''}`;
+                item.innerHTML = `
+                    <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${task.id})">
+                    <span>${task.text}</span>
+                    <i class="fas fa-trash delete-btn" onclick="deleteTask(${task.id})"></i>
+                `;
+                taskList.appendChild(item);
+            });
+        }
+
+        window.toggleTask = (id) => {
+            const task = studyData.tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                saveData();
+                renderTasks();
+            }
+        };
+
+        window.deleteTask = (id) => {
+            studyData.tasks = studyData.tasks.filter(t => t.id !== id);
+            saveData();
+            renderTasks();
+        };
+
+        // --- WEEKLY CHART ---
+        function renderWeeklyChart() {
+            weeklyChart.innerHTML = '';
+            const days = [];
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(Date.now() - i * 86400000).toISOString().split('T')[0];
+                days.push(date);
+            }
+
+            const maxSeconds = Math.max(...days.map(d => (studyData.history[d] || 0) + (d === studyData.lastDate ? studyData.todaySeconds : 0)), 3600);
+
+            days.forEach(d => {
+                const dayName = new Date(d).toLocaleDateString('en-US', { weekday: 'short' });
+                const seconds = (studyData.history[d] || 0) + (d === studyData.lastDate ? studyData.todaySeconds : 0);
+                const height = (seconds / maxSeconds) * 100;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'weekly-bar-wrapper';
+                wrapper.innerHTML = `
+                    <div class="weekly-bar" style="height: ${height}%" title="${Math.floor(seconds/60)} mins"></div>
+                    <div class="weekly-day">${dayName}</div>
+                `;
+                weeklyChart.appendChild(wrapper);
+            });
+        }
+
+        // --- MISC ---
+        function setMotivation() {
+            motivationBox.textContent = motivations[Math.floor(Math.random() * motivations.length)];
+        }
+
+        startBtn.onclick = startTimer;
+        pauseBtn.onclick = pauseTimer;
+        resetBtn.onclick = resetTimer;
+        
+        quickStartBtn.onclick = () => {
+            resetTimer(); 
+            startTimer();
+        };
+
+        // Theme Toggle Support
+        const themeBtn = document.getElementById('theme-toggle');
+        if (themeBtn) {
+            themeBtn.onclick = () => {
+                const isDark = document.body.classList.toggle('dark-mode');
+                document.body.classList.toggle('light-mode', !isDark);
+                themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            };
+            
+            // Sync theme on load
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.body.classList.remove('light-mode');
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        init();
+
+        // Autosave on unload if timer is running
+        window.addEventListener('beforeunload', () => {
+             if (timerState.running) {
+                 saveTimerState();
+             }
+        });
+
+    </script>
+</body>
+</html>
